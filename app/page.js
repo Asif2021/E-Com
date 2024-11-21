@@ -1,8 +1,9 @@
+import SideNav from "./components/sidenav";
 
 export default function Home() {
   return (
     <div>
-     <h1>hello world !!!</h1>
+     <SideNav/>
     </div>
   );
 }
