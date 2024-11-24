@@ -1,22 +1,23 @@
+'use client'
+
 import Link from "next/link"
 
-const ProductCard = () => {
-  return (
-    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+const ProductCard = ({ title, price, image, description }) => {  return (
+    <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <Link href="#">
       <img
-        className="rounded-t-lg w-full h-auto"
-        src="/images/image1.png"
+        className="rounded-t-lg w-full h-48"
+        src={image}
         alt="product image"
       />
     </Link>
     <div className="px-5 pb-5">
       <Link href="#">
-        <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-          Apple Watch Series 7 GPS
+        <h5 className="text-xl truncate font-semibold tracking-tight text-gray-900 dark:text-white">
+         {title}
         </h5>
       </Link>
-      <div className="flex items-center mt-2.5 mb-5">
+      {/* <div className="flex items-center mt-2.5 mb-5">
         <div className="flex items-center space-x-1 rtl:space-x-reverse">
           <svg
             className="w-4 h-4 text-yellow-300"
@@ -67,10 +68,13 @@ const ProductCard = () => {
         <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
           5.0
         </span>
+      </div> */}
+      <div className="flex items-center mt-2 mb-5">
+        <p className="truncate">{description} </p>
       </div>
       <div className="flex items-center justify-between">
-        <span className="text-3xl font-bold text-gray-900 dark:text-white">
-          $599
+        <span className="text-2xl font-bold text-gray-900 dark:text-white">
+          {price}
         </span>
         <Link
           href="#"

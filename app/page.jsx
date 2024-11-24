@@ -1,7 +1,6 @@
 import Header from "./components/Header";
-import SideNav from "./components/Sidenav";
 import Footer from "./components/Footer";
-import ProductCard from './components/ProductCard'
+import ProductGrid from './components/ProductGrid'
 
 export const metadata = {
   title: "Landing-Page",
@@ -9,10 +8,12 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Header />
-      <ProductCard/>
+      <div className="mr-auto ml-auto">
+      <ProductGrid/>
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }

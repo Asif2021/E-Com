@@ -18,19 +18,19 @@ export default function Navbar() {
   const isLinkActive = (href) => pathname === href;
 
   return (
-    <nav className="bg-white shadow-lg mb-5">
+    <nav className="bg-white shadow-lg mb-5 uppercase">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center justify-between">
-            {/* Logo displaying in both Mobile and computer  */}
+            {/* Logo displaying in both Mobile and Desktop  */}
             <div className="flex-shrink-0">
-              <Link href="/" className="text-2xl font-bold text-gray-800">
+              <Link href="/" className="text-xl font-bold text-gray-800">
                 Logo
               </Link>
             </div>
 
-            {/* Search Bar showing on top in mobile view and hidden in computer */}
-            <div className="relative flex md:hidden ml-2">
+            {/* Search Bar showing on top in mobile view and hidden in Desktop */}
+            <div className="relative flex md:hidden mx-2">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-5 w-5 text-gray-400" />
               </div>
@@ -40,8 +40,13 @@ export default function Navbar() {
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               />
             </div>
+            {/* shopping cart in mobile view  */}
+            <div className="relative cursor-pointer md:hidden mx-2">
+              <ShoppingCart />
+              <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">10</div>
+              </div>
 
-            {/* Computer View  */}
+            {/* Desktop View  */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link
@@ -58,7 +63,7 @@ export default function Navbar() {
                 <div
                   className="relative"
                   onMouseEnter={() => setIsProductsOpen(true)}
-                  // onMouseLeave={() => setIsProductsOpen(false)}
+                  onMouseLeave={() => setIsProductsOpen(false)}
                 >
                   <Link
                     href="/categories"
@@ -74,7 +79,8 @@ export default function Navbar() {
                   </Link>
                   {isProductsOpen && (
                     <div
-                      onMouseLeave={() => setIsProductsOpen(false)}
+                    onMouseEnter={() => setIsProductsOpen(true)}
+                    onMouseLeave={() => setIsProductsOpen(false)}
                       className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
                     >
                       <div
@@ -116,7 +122,10 @@ export default function Navbar() {
                   className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
+              <div className="relative cursor-pointer">
               <ShoppingCart />
+              <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">10</div>
+              </div>
               <button className="ml-4">LogIn</button>
               <button className="ml-4">SignUp</button>
             </div>
