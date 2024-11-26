@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="mr-auto ml-auto">
+      <div className="flex justify-center items-center">
       <ProductGrid/>
       </div>
       <Footer />

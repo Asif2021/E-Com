@@ -1,13 +1,14 @@
-'use client'
-
 import Link from "next/link"
+import Image from 'next/image'
 
 const ProductCard = ({ title, price, image, description }) => {  return (
     <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <Link href="#">
-      <img
+      <Image
         className="rounded-t-lg w-full h-48"
         src={image}
+        width={500}
+        height={500}
         alt="product image"
       />
     </Link>
