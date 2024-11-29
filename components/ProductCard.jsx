@@ -14,7 +14,7 @@ const ProductCard = ({ title, price, image, description }) => {  return (
     </Link>
     <div className="px-5 pb-5">
       <Link href="#">
-        <h5 className="text-xl truncate font-semibold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="text-base md:text-xl truncate font-semibold tracking-tight text-gray-900 dark:text-white">
          {title}
         </h5>
       </Link>
@@ -71,15 +71,15 @@ const ProductCard = ({ title, price, image, description }) => {  return (
         </span>
       </div> */}
       <div className="flex items-center mt-2 mb-5">
-        <p className="truncate">{description} </p>
+        <p className="truncate text-sm md:text-base">{description} </p>
       </div>
       <div className="flex items-center justify-between">
-        <span className="text-2xl font-bold text-gray-900 dark:text-white">
+        <span className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
           {price}
         </span>
         <Link
           href="#"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Add to cart
         </Link>
