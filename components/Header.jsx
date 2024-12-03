@@ -1,15 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import {logout} from '../actions/userController'
 
 export default function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const pathname = usePathname();
+
+  // Fetch auth status from the API
+  useEffect(() => {
+    const fetchAuthStatus = async () => {
+      const res = await fetch('/api/auth/status');
+      const data = await res.json();
+      setIsLoggedIn(data.isLoggedIn);
+    };
+    fetchAuthStatus();
+  }, []);
 
   const toggleProducts = () => {
     setIsProductsOpen(!isProductsOpen);
@@ -57,11 +69,7 @@ export default function Navbar() {
                     "text-gray-800 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium",
                     isLinkActive("/")
                       ? "text-blue-500 font-extrabold"
-                      : "text-gray-800 hover:text-gray-900"
-                  )}
-                >
-                  Home
-                </Link>
+                      : "text-gray-800 hover:text-gray-900")}>Home</Link>
                       
                 <div className="relative" onMouseEnter={() => setIsProductsOpen(true)}  onMouseLeave={() => setIsProductsOpen(false)} >
                   <Link
@@ -119,13 +127,20 @@ export default function Navbar() {
                   10
                 </div>
               </div>
+              {isLoggedIn ? (
+                <form action={logout}>
+                  <button type="submit" className="ml-4 uppercase">
+                    Logout
+                  </button>
+                </form>
+              ) : ( <div>
               <Link href="/login" className="ml-4 uppercase">
                 LogIn
               </Link>
               <Link href="/signUp" className="ml-4 uppercase">
                 SignUp
-              </Link>
-            </div>
+              </Link></div>)}
+             </div>
           </div>
 
           {/* Mobile View  */}
@@ -196,6 +211,13 @@ export default function Navbar() {
               )}
             </div>
           </div>
+          {isLoggedIn ? (
+                <form action={logout}>
+                  <button type="submit" className="ml-4 uppercase">
+                    Logout
+                  </button>
+                </form>
+              ) : (
           <div className="px-2 pt-2 pb-3 sm:px-3">
             <div className="px-2">
               <Link href="/login" className="uppercase">
@@ -210,10 +232,9 @@ export default function Navbar() {
                 SignUp
               </Link>
             </div>
-          </div>
+          </div>)}
         </div>
       )}
     </nav>
   );
 }
-
