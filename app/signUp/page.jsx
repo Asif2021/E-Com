@@ -1,13 +1,14 @@
 import RegistrationForm from '../../components/RegistrationForm'
-import { getUserFromCookie } from "../../lib/getUser";
-import { redirect } from 'next/navigation';
+// import { getUserFromCookie } from "../../lib/getUser";
+
 
 
 const page = async () => {
-  const user = await getUserFromCookie();
+  // const user = await getUserFromCookie();
   return (
     <div className='mt-0 md:mt-10 max-w-[850px] mx-auto'>
-      {user ? redirect("/login") : <RegistrationForm/>  }
+      <RegistrationForm/>
+      {/* {user ? redirect("/login") : <RegistrationForm/>  } */}
     </div>
   )
 }

@@ -9,7 +9,9 @@ export const metadata = {
 export default function Home() {
   return (
     <>
+    <div className="mb-5">
       <Header />
+    </div>
       <div className="flex justify-center items-center">
       <ProductGrid/>
       </div>

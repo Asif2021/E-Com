@@ -1,23 +1,22 @@
 import Link from "next/link"
 import Image from 'next/image'
 
-const ProductCard = ({ title, price, image, description }) => {  return (
-    <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    <Link href="#">
+const ProductCard = ({ id, title, price, image, description }) => {  return (
+  <Link href={`/product/${id}`} >
+    <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
       <Image
         className="rounded-t-lg w-full h-48"
         src={image}
         width={500}
         height={500}
-        alt="product image"
-      />
-    </Link>
+        alt="product image"/>
+    
     <div className="px-5 pb-5">
-      <Link href="#">
+      <div>
         <h5 className="text-base md:text-xl truncate font-semibold tracking-tight text-gray-900 dark:text-white">
          {title}
         </h5>
-      </Link>
+      </div>
       {/* <div className="flex items-center mt-2.5 mb-5">
         <div className="flex items-center space-x-1 rtl:space-x-reverse">
           <svg
@@ -77,16 +76,16 @@ const ProductCard = ({ title, price, image, description }) => {  return (
         <span className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
           {price}
         </span>
-        <Link
+        <button
           href="#"
           className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Add to cart
-        </Link>
+        </button>
       </div>
     </div>
   </div>
-  
+  </Link>
   )
 }
 export default ProductCard

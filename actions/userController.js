@@ -34,7 +34,7 @@ export const register = async function (prevState, formData) {
   if (typeof ourUser.email != "string") ourUser.email = "";
   if (typeof ourUser.password != "string") ourUser.password = "";
   if (typeof ourUser.confirm_password != "string") ourUser.confirm_password = "";
-  // if (typeof ourUser.role != "string") ourUser.role = "";
+  if (typeof ourUser.role != "string") ourUser.role = "";
 
   ourUser.first_name = ourUser.first_name.trim();
   ourUser.last_name = ourUser.last_name.trim();
@@ -121,13 +121,16 @@ if (usernameInQuestion){
     maxAge: 60 * 60 * 24,
     secure: true,
   });
+  
+  redirect('/login')
 
-  return {
-    success: true
-  }
+  // return {
+  //   success: true
+  // }
 };
 
 export const login = async function (prevState, formData) {
+
   const failObject = {
     success:false,
     message:"Invalid Credentials"}
@@ -148,12 +151,11 @@ export const login = async function (prevState, formData) {
   if(!matchOrNot){
     return failObject
   }
-  
+    
   //create json web token (jwt) value 
   const ourTokenValue = jwt.sign(
     {
-      skyColor: "blue",
-      userId: user._id,
+     userId: user._id,
       // username: user.first_name + user.last_name,
       exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
     },
@@ -168,7 +170,12 @@ export const login = async function (prevState, formData) {
     maxAge: 60 * 60 * 24,
     secure: true,
   });
- return redirect("/dashboard")
+  if(user.role == "customer"){
+    return redirect("/")
+  }
+  if(user.role == 'seller'){
+    return redirect('/dashboard')
+  }
 
 };
 

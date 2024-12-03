@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { redirect } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,7 +18,7 @@ export default function Navbar() {
   const isLinkActive = (href) => pathname === href;
 
   return (
-    <nav className="bg-white shadow-lg mb-5 uppercase">
+    <nav className="bg-white shadow-lg uppercase">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center justify-between">
@@ -63,19 +62,19 @@ export default function Navbar() {
                 >
                   Home
                 </Link>
-                <div className="relative" onClick={() => setIsProductsOpen(true)}>
+                      
+                <div className="relative" onMouseEnter={() => setIsProductsOpen(true)}  onMouseLeave={() => setIsProductsOpen(false)} >
                   <Link
                     href="/"
                     className={clsx("text-gray-800 px-3 py-2 rounded-md text-sm font-medium inline-flex items-center",
-                      isLinkActive("/")? "text-blue-500 font-extrabold": "text-gray-800 hover:text-gray-900")}>
+                      isLinkActive("/") ? "text-blue-500 font-extrabold" : "text-gray-800 hover:text-gray-900")}>
                     Categories
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </Link>
                   {isProductsOpen && (
                     <div
                       onMouseLeave={() => setIsProductsOpen(false)}
-                      className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-                    >
+                      className="absolute left-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                       <div
                         className="py-0"
                         role="menu"
@@ -83,14 +82,14 @@ export default function Navbar() {
                         aria-labelledby="options-menu">
                         <Link
                           href="/"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md font-medium items-center"
                           role="menuitem"
                         >
                           Shoes
                         </Link>
                         <Link
                           href="/"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md font-medium items-center"
                           role="menuitem"
                         >
                           Cloths
@@ -206,7 +205,6 @@ export default function Navbar() {
             <div className="px-2 pt-2">
               <Link
                 href="/signUp"
-                onClick={() => redirect("/signup")}
                 className="uppercase"
               >
                 SignUp
@@ -218,3 +216,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
