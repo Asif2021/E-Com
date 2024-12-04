@@ -11,6 +11,7 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [username, setUsername] = useState();
   const pathname = usePathname();
 
   // Fetch auth status from the API
@@ -19,6 +20,7 @@ export default function Navbar() {
       const res = await fetch('/api/auth/status');
       const data = await res.json();
       setIsLoggedIn(data.isLoggedIn);
+      setUsername(data.username);
     };
     fetchAuthStatus();
   }, []);
@@ -130,7 +132,7 @@ export default function Navbar() {
               {isLoggedIn ? (
                 <form action={logout}>
                   <button type="submit" className="ml-4 uppercase">
-                    Logout
+                {username}
                   </button>
                 </form>
               ) : ( <div>
@@ -214,7 +216,7 @@ export default function Navbar() {
           {isLoggedIn ? (
                 <form action={logout}>
                   <button type="submit" className="ml-4 uppercase">
-                    Logout
+                    {username}
                   </button>
                 </form>
               ) : (
