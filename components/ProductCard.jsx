@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const ProductCard = ({ id, title, price, image, description }) => {  return (
   <Link href={`/product/${id}`} >
-    <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 hover:scale-105 hover:shadow-lg">
       <Image
         className="rounded-t-lg w-full h-48"
         src={image}

@@ -1,6 +1,9 @@
 import Footer from "../components/Footer";
 import ProductGrid from "../components/ProductGrid";
 import Header from "../components/Header";
+import { Suspense } from 'react';
+import { CardsSkeleton } from '../components/Skeletons';
+
 
 export const metadata = {
   title: "Landing-Page",
@@ -13,7 +16,9 @@ export default function Home() {
         <Header />
       </div>
       <div className="flex justify-center items-center">
-        <ProductGrid />
+        <Suspense fallback={<CardsSkeleton />}>
+          <ProductGrid />
+        </Suspense>
       </div>
       <Footer />
     </>
