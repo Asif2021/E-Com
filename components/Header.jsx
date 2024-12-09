@@ -6,7 +6,8 @@ import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Modal from '../components/Modal'
-import { logout } from "../actions/userController";
+import { useContext } from "react";
+import {countContext} from '../app/Context/Context'
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,6 +16,8 @@ export default function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [username, setUsername] = useState();
   const pathname = usePathname();
+
+  const ContextObject = useContext(countContext);
 
   // Fetch auth status from the API
   useEffect(() => {
@@ -60,7 +63,7 @@ export default function Navbar() {
             <div className="relative cursor-pointer md:hidden mx-2">
               <ShoppingCart />
               <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                10
+             {ContextObject.count}
               </div>
             </div>
 
@@ -143,7 +146,7 @@ export default function Navbar() {
               <div className="relative cursor-pointer">
                 <ShoppingCart />
                 <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                  10
+                {ContextObject.count}
                 </div>
               </div>
 
