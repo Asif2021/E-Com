@@ -10,17 +10,20 @@ export const metadata = {
 };
 
 export default function Home() {
+ 
   return (
     <>
-      <div className="mb-5">
-        <Header />
-      </div>
-      <div className="flex justify-center items-center">
+    <div className="flex flex-col min-h-screen">
+    <Header />
+    <main className="flex-grow">
+      <div className="flex justify-center items-center py-8">
         <Suspense fallback={<CardsSkeleton />}>
           <ProductGrid />
         </Suspense>
       </div>
-      <Footer />
-    </>
+    </main>
+    <Footer />
+  </div>
+ </>
   );
 }

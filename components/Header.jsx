@@ -5,9 +5,9 @@ import Link from "next/link";
 import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import Modal from '../components/Modal'
-import { useContext } from "react";
-import {countContext} from '../app/Context/Context'
+import LogoutModal from "./LogoutModal";
+import { useCount } from "../app/Context/CountContext";
+import RightNav from "../components/RightNav";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,9 +15,9 @@ export default function Navbar() {
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [username, setUsername] = useState();
+  const [rightNavOpen, setRightNavOpen] = useState(false);
   const pathname = usePathname();
-
-  const ContextObject = useContext(countContext);
+  const { count } = useCount();
 
   // Fetch auth status from the API
   useEffect(() => {
@@ -60,13 +60,21 @@ export default function Navbar() {
               />
             </div>
             {/* shopping cart in mobile view  */}
-            <div className="relative cursor-pointer md:hidden mx-2">
+            <div
+              className="relative cursor-pointer md:hidden mx-2"
+              onClick={() => setRightNavOpen(!rightNavOpen)}
+            >
               <ShoppingCart />
               <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-             {ContextObject.count}
+                {count}
               </div>
             </div>
-
+            {rightNavOpen && (
+              <RightNav
+                rightNavOpen={rightNavOpen}
+                setRightNavOpen={setRightNavOpen}
+              />
+            )}
             {/* Desktop View  */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
@@ -143,23 +151,36 @@ export default function Navbar() {
                   className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              <div className="relative cursor-pointer">
+              <div
+                className="relative cursor-pointer"
+                onClick={() => setRightNavOpen(!rightNavOpen)}
+              >
                 <ShoppingCart />
                 <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                {ContextObject.count}
+                  {count}
                 </div>
               </div>
+              {rightNavOpen && (
+                <RightNav
+                  rightNavOpen={rightNavOpen}
+                  setRightNavOpen={setRightNavOpen}
+                />
+              )}
 
               {/* if user is loggedIn then display username in desktop else displaying Links of Login and SignUp */}
               {isLoggedIn ? (
                 <div
                   className="relative"
-                  onClick={() => setIsProfileOpen(true)}>
+                  onClick={() => setIsProfileOpen(true)}
+                >
                   <button className="ml-4 uppercase">{username}</button>
                   {isProfileOpen && (
-                   <div onMouseLeave={() => setIsProfileOpen(false)} className="absolute right-0 px-2 py-2 w-24 text-sm text-gray-700 bg-gray-100 hover:bg-gray-400 rounded-md font-medium items-center text-center" >
-                        <Modal/>
-                      </div>
+                    <div
+                      onMouseLeave={() => setIsProfileOpen(false)}
+                      className="absolute right-0 px-2 py-2 w-24 text-sm text-gray-700 bg-gray-100 hover:bg-gray-400 rounded-md font-medium items-center text-center"
+                    >
+                      <LogoutModal />
+                    </div>
                   )}
                 </div>
               ) : (
@@ -244,19 +265,20 @@ export default function Navbar() {
               )}
             </div>
           </div>
-              {/* if user is loggedIn then display username in Mobile View else displaying Links of Login and SignUp */}
+          {/* if user is loggedIn then display username in Mobile View else displaying Links of Login and SignUp */}
           {isLoggedIn ? (
+            <div className="relative" onClick={() => setIsProfileOpen(true)}>
+              <button className="ml-4 uppercase">{username}</button>
+              {isProfileOpen && (
                 <div
-                  className="relative"
-                  onClick={() => setIsProfileOpen(true)}>
-                  <button className="ml-4 uppercase">{username}</button>
-                  {isProfileOpen && (
-                      <div onMouseLeave={() => setIsProfileOpen(false)} className="absolute left-0 px-2 py-2 w-24 text-sm text-gray-700 bg-gray-100 hover:bg-gray-400 rounded-md font-medium items-center text-center" >
-                      <Modal/>
-                    </div>
-                  )}
+                  onMouseLeave={() => setIsProfileOpen(false)}
+                  className="absolute left-0 px-2 py-2 w-24 text-sm text-gray-700 bg-gray-100 hover:bg-gray-400 rounded-md font-medium items-center text-center"
+                >
+                  <Modal />
                 </div>
-              ) : (
+              )}
+            </div>
+          ) : (
             <div className="px-2 pt-2 pb-3 sm:px-3">
               <div className="px-2">
                 <Link href="/login" className="uppercase">

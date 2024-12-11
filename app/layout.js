@@ -1,5 +1,5 @@
 import "./globals.css";
-import {ContextProvider} from './Context/ContextProvider'
+import {Providers} from './Context/Providers'
 // import { metadata } from 'next';
 
 
@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-white mt-2 max-w-[1100px] mx-auto px-4 rounded-sm">
-      <ContextProvider>{children}</ContextProvider>
+      <Providers>{children}</Providers>
       </body>
     </html>
   );

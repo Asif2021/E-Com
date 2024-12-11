@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import {logout} from '../actions/userController'
 
-const Modal = () => {
+const LogoutModal = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const openModal = () => setIsOpen(true)
@@ -13,7 +13,6 @@ const Modal = () => {
     <>
       <button
         onClick={openModal}
-        
         type="button"
       >
         Logout
@@ -86,5 +85,5 @@ const Modal = () => {
   )
 }
 
-export default Modal
+export default LogoutModal
 
