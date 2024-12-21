@@ -1,7 +1,7 @@
 import "./globals.css";
-import {Providers} from './Context/Providers'
+import { Providers } from "../Context/Providers";
+import Header from "../components/Header";
 // import { metadata } from 'next';
-
 
 // export const metadata = {
 //   title: {
@@ -16,7 +16,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="bg-white mt-2 max-w-[1100px] mx-auto px-4 rounded-sm">
-      <Providers>{children}</Providers>
+        <Providers>
+          <div>
+            <Header />
+          </div>
+          <main> {children} </main>
+        </Providers>
       </body>
     </html>
   );

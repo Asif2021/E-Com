@@ -1,29 +1,28 @@
-import Link from "next/link"
-import Image from 'next/image'
-import { useContext } from "react"
-import { useCount } from "../app/Context/CountContext"
+import Link from "next/link";
+import Image from "next/image";
+import { useCart } from "../Context/CartContext";
 
-const ProductCard = ({ id, title, price, image, description }) => {
-  const {count, setCount} = useCount();
-  
-  return (
-  <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700 hover:scale-105 hover:shadow-lg">
-      <Link href={`/product/${id}`} >
-      <Image
-        className="rounded-t-lg w-full h-48"
-        src={image}
-        width={500}
-        height={500}
-        alt="product image"/>
+const ProductCard = ({product}) => {
+  const { dispatch } = useCart()
+
+   return (
+    <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700 hover:scale-105 hover:shadow-lg">
+      <Link href={`/product/${product.id}`}>
+        <Image
+          className="rounded-t-lg w-full h-48"
+          src={product.image}
+          width={500}
+          height={500}
+          alt="product image"
+        />
       </Link>
 
-    <div className="px-5 pb-5">
-     
+      <div className="px-5 pb-5">
         <h5 className="text-base md:text-xl mt-2 truncate font-semibold tracking-tight text-gray-900 dark:text-white">
-         {title}
+          {product.title}
         </h5>
-    
-      {/* <div className="flex items-center mt-2.5 mb-5">
+
+        {/* <div className="flex items-center mt-2.5 mb-5">
         <div className="flex items-center space-x-1 rtl:space-x-reverse">
           <svg
             className="w-4 h-4 text-yellow-300"
@@ -76,23 +75,22 @@ const ProductCard = ({ id, title, price, image, description }) => {
         </span>
       </div> */}
 
-        <p className="truncate text-sm md:text-base my-3">{description} </p>
-      
-      
-      <div className="flex items-center justify-between">
-        <span className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
-          {price}
-        </span>
-        <button
-          onClick={() => setCount(prevCount => prevCount + 1)}
-          className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Add to cart
-        </button>
+        <p className="truncate text-sm md:text-base my-3">
+          {product.description}
+        </p>
+        <div className="flex items-center justify-between">
+          <span className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
+            {product.price}
+          </span>
+          <button
+          onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}
+            className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Add to cart
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-
-  )
-}
-export default ProductCard
+  );
+};
+export default ProductCard;

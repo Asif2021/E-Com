@@ -6,7 +6,7 @@ import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import LogoutModal from "./LogoutModal";
-import { useCount } from "../app/Context/CountContext";
+import { useCart } from "../Context/CartContext";
 import RightNav from "../components/RightNav";
 
 export default function Navbar() {
@@ -17,7 +17,7 @@ export default function Navbar() {
   const [username, setUsername] = useState();
   const [rightNavOpen, setRightNavOpen] = useState(false);
   const pathname = usePathname();
-  const { count } = useCount();
+ const { state } = useCart()
 
   // Fetch auth status from the API
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function Navbar() {
   const isLinkActive = (href) => pathname === href;
 
   return (
-    <nav className="bg-white shadow-lg uppercase">
+    <nav className={(pathname == "/login" || pathname == "/signUp") ? 'hidden' : "block bg-white shadow-lg uppercase"}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center justify-between">
@@ -46,7 +46,7 @@ export default function Navbar() {
               <Link href="/" className="text-xl font-bold text-gray-800">
                 Logo
               </Link>
-            </div>
+            </div>  
 
             {/* Search Bar showing on top in mobile view and hidden in Desktop */}
             <div className="relative flex md:hidden mx-2">
@@ -66,7 +66,8 @@ export default function Navbar() {
             >
               <ShoppingCart />
               <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                {count}
+                {/* {count} */}
+                10
               </div>
             </div>
             {rightNavOpen && (
@@ -157,7 +158,8 @@ export default function Navbar() {
               >
                 <ShoppingCart />
                 <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                  {count}
+                  {state.items.length}
+                  
                 </div>
               </div>
               {rightNavOpen && (
