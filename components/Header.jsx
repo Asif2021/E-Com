@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import clsx from "clsx";
 import LogoutModal from "./LogoutModal";
 import { useCart } from "../Context/CartContext";
@@ -33,6 +33,9 @@ export default function Navbar() {
   const toggleProducts = () => {
     setIsProductsOpen(!isProductsOpen);
   };
+  const  handleRightNav = ()=>{
+    !isLoggedIn ? redirect('/login') : setRightNavOpen(!rightNavOpen)
+  }
 
   const isLinkActive = (href) => pathname === href;
 
@@ -62,12 +65,10 @@ export default function Navbar() {
             {/* shopping cart in mobile view  */}
             <div
               className="relative cursor-pointer md:hidden mx-2"
-              onClick={() => setRightNavOpen(!rightNavOpen)}
-            >
+              onClick={handleRightNav} >
               <ShoppingCart />
               <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                {/* {count} */}
-                10
+              {state.items.length}
               </div>
             </div>
             {rightNavOpen && (
@@ -76,6 +77,7 @@ export default function Navbar() {
                 setRightNavOpen={setRightNavOpen}
               />
             )}
+            
             {/* Desktop View  */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
@@ -154,12 +156,11 @@ export default function Navbar() {
               </div>
               <div
                 className="relative cursor-pointer"
-                onClick={() => setRightNavOpen(!rightNavOpen)}
+                onClick={handleRightNav}
               >
                 <ShoppingCart />
                 <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
                   {state.items.length}
-                  
                 </div>
               </div>
               {rightNavOpen && (
@@ -276,7 +277,7 @@ export default function Navbar() {
                   onMouseLeave={() => setIsProfileOpen(false)}
                   className="absolute left-0 px-2 py-2 w-24 text-sm text-gray-700 bg-gray-100 hover:bg-gray-400 rounded-md font-medium items-center text-center"
                 >
-                  <Modal />
+                  <LogoutModal />
                 </div>
               )}
             </div>

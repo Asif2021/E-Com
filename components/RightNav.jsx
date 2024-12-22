@@ -1,20 +1,20 @@
-'use client'
+"use client";
 
-import React from 'react'
-import {ShoppingCart} from 'lucide-react'
-import { useCart } from '../Context/CartContext'
-import ProductSummery from '../components/ProductSummery'
+import React from "react";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "../Context/CartContext";
+import ProductSummery from "../components/ProductSummery";
 
-export default function RightDrawer({rightNavOpen, setRightNavOpen}) {
-  const { state, dispatch } = useCart()
+export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
+  const { state, dispatch } = useCart();
 
   return (
     <>
-     {/* drawer component */}
+      {/* drawer component */}
       <div
-        className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform ${
-          rightNavOpen ? 'translate-x-0' : 'translate-x-full'
-        } bg-white w-2/4 dark:bg-gray-800`}
+        className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transform transition-transform duration-900 ease-in-out ${
+          rightNavOpen ? "translate-x-0" : "translate-x-full"
+        } bg-white w-full md:w-2/4 dark:bg-gray-800`}
         tabIndex={-1}
         aria-labelledby="drawer-right-label"
       >
@@ -22,13 +22,12 @@ export default function RightDrawer({rightNavOpen, setRightNavOpen}) {
           id="drawer-right-label"
           className="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
         >
-        <ShoppingCart />
-
-          Your Cart 
+          <ShoppingCart />
+          Your Cart
         </h5>
         <button
           type="button"
-          onClick={()=>setRightNavOpen(!rightNavOpen)}
+          onClick={() => setRightNavOpen(!rightNavOpen)}
           className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
         >
           <svg
@@ -49,12 +48,9 @@ export default function RightDrawer({rightNavOpen, setRightNavOpen}) {
           <span className="sr-only">Close menu</span>
         </button>
         <div className="mt-8 border-t pt-8">
-      <ProductSummery   />
+          <ProductSummery />
+        </div>
       </div>
- 
-
-</div>
     </>
-  )
+  );
 }
-

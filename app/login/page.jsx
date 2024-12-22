@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useActionState } from "react";
 import { login } from "../../actions/userController";
+import { ArrowLeft } from "lucide-react";
+
 
 
 const page = () => {
@@ -10,6 +12,7 @@ const page = () => {
   return (
     <>
       <form action={formAction} className="space-y-3 max-w-[450px] mx-auto flex-1 rounded-lg border border-gray-300 shadow-2xl p-8  mt-0 md:mt-10">
+<Link href="/" className="flex font-mono"><ArrowLeft/> Go-Home</Link>
         <h2 className="flex justify-center font-bold uppercase text-3xl text-gray-800">
           LogIn
         </h2>

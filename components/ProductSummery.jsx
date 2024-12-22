@@ -50,52 +50,16 @@ const ProductSummery = () => {
                         className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-white bg-red-700 border border-gray-300 rounded-full focus:outline-none"
                         type="button"
                       >
-                        <span className="sr-only">Quantity button</span>
-                        <svg
-                          className="w-3 h-3"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 2"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M1 1h16"
-                          />
-                        </svg>
+                       -
                       </button>
-                      <div>
-                        <input
-                          type="number"
-                          id="first_product"
-                          className="bg-gray-50 w-14 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder={1}
-                          required=""
-                        />
-                      </div>
+                      <p>
+                      {item.quantity}
+                      </p>
                       <button
                         className="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-white bg-green-700 border border-gray-300 rounded-full"
                         type="button"
                       >
-                        <span className="sr-only">Quantity button</span>
-                        <svg
-                          className="w-3 h-3"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 18 18"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 1v16M1 9h16"
-                          />
-                        </svg>
+                       +
                       </button>
                     </div>
                   </td>

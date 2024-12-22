@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "../Context/CartContext";
+import {  ShoppingCart } from "lucide-react";
+
 
 const ProductCard = ({product}) => {
   const { dispatch } = useCart()
@@ -83,10 +85,15 @@ const ProductCard = ({product}) => {
             {product.price}
           </span>
           <button
-          onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}
+            onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}
             className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Add to cart
+          </button>
+          <button 
+          onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}
+          className="block md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <ShoppingCart />
           </button>
         </div>
       </div>
