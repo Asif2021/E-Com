@@ -1,5 +1,5 @@
 import { Trash2 } from "lucide-react";
-import { useCart } from "../Context/CartContext";
+import { useCart } from "../../Context/CartContext";
 
 const ProductSummery = () => {
   const { state, dispatch } = useCart();

@@ -6,8 +6,8 @@ import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { redirect, usePathname } from "next/navigation";
 import clsx from "clsx";
 import LogoutModal from "./LogoutModal";
-import { useCart } from "../Context/CartContext";
-import RightNav from "../components/RightNav";
+import { useCart } from "../../Context/CartContext";
+import RightNav from "./RightNav";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

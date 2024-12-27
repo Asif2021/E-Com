@@ -1,5 +1,5 @@
-import Header from '../../components/Header'
-import SideNav from '../../components/Sidenav';
+import Header from '../components/Header'
+import SideNav from '../components/Sidenav';
 
 
 // export const experimental_ppr = true;
@@ -8,8 +8,7 @@ export default function Layout({ children }) {
   return (
     <>
     <div className='h-screen'>
-      <Header/> 
-      <div className="flex flex-col md:flex-row md:overflow-hidden">
+     <div className="flex flex-col md:flex-row md:overflow-hidden">
       <div className="w-full flex-none md:w-64">
         <SideNav />
       </div>

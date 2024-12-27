@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "../Context/CartContext";
+import { useCart } from "../../Context/CartContext";
 import {  ShoppingCart } from "lucide-react";
 
 

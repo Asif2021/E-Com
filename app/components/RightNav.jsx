@@ -2,8 +2,8 @@
 
 import React from "react";
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "../Context/CartContext";
-import ProductSummery from "../components/ProductSummery";
+import { useCart } from "../../Context/CartContext";
+import ProductSummery from "./ProductSummery";
 
 export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
   const { state, dispatch } = useCart();

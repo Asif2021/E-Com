@@ -174,7 +174,7 @@ export const login = async function (prevState, formData) {
     return redirect("/")
   }
   if(user.role == 'seller'){
-    return redirect('/dashboard')
+    return redirect('/sellerPage')
   }
 
 };

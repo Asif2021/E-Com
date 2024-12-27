@@ -1,4 +1,4 @@
-import { ProductData } from '../../../components/ProductData';
+import { ProductData } from '../../components/ProductData';
 import Image from 'next/image';
 
 export async function generateStaticParams() {

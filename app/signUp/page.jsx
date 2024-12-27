@@ -1,4 +1,4 @@
-import RegistrationForm from '../../components/RegistrationForm'
+import RegistrationForm from '../components/RegistrationForm'
 import { getUserFromCookie } from "../../lib/getUser";
 import { redirect } from 'next/navigation';
 

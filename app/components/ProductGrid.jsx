@@ -1,6 +1,6 @@
 'use client'
 
-import ProductCard from "../components/ProductCard";
+import ProductCard from "./ProductCard";
 import { useState, useEffect } from "react";
 import Loading from './Loading'
 

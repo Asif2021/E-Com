@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
-import { register } from "../actions/userController";
+import { register } from "../../actions/userController";
 import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 

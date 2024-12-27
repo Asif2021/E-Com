@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Providers } from "../Context/Providers";
-import Header from "../components/Header";
+import Header from "./components/Header";
 // import { metadata } from 'next';
 
 // export const metadata = {
