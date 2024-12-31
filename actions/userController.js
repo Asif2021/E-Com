@@ -157,6 +157,7 @@ export const login = async function (prevState, formData) {
     {
      userId: user._id,
       username: user.first_name + " " + user.last_name,
+      role: user.role,
       exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
     },
     process.env.JWTSECRET

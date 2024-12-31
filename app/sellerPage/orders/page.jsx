@@ -1,10 +1,9 @@
-import Link from "next/link";
 
 const Orders = () => {
   return (
     <div className="relative shadow-md sm:rounded-lg">
         <h1 className="text-3xl my-2 ml-4 font-bold">01 Orders</h1>
-        <table className="w-full text-sm text-left">
+        <table className="w-full text-sm text-left table-fixed">
           <thead className="text-l text-gray-700 uppercase">
             <tr>
               <th scope="col" className="px-6 py-3">
