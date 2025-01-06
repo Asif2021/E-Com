@@ -1,5 +1,5 @@
 import Header from '../components/Header'
-import SideNav from '../components/Sidenav';
+import SideNav from '../components/customer/Sidenav';
 
 
 // export const experimental_ppr = true;

@@ -29,16 +29,8 @@ const ProductGrid = () => {
       { products.map((product) => {
       return (
           <ProductCard
-            key={product.id}
-            product={product}
-            // id={data.id}
-            // image={data.image}
-            // title={data.title}
-            // description={data.description}
-            // price={data.price}
-          />
-        );
-      })}
+            key={product?.id}
+            product={product}/>)})}
     </div>)}
     </>
   );

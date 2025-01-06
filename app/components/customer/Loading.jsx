@@ -1,6 +1,3 @@
-import React from 'react'
-import {CardsSkeleton} from './Skeletons'
-
 const Loading = () => {
   return (
     <>

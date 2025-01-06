@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-import {logout} from '../../actions/userController'
+import {logout} from '../../../actions/userController'
 
 const LogoutModal = () => {
   const [isOpen, setIsOpen] = useState(false)

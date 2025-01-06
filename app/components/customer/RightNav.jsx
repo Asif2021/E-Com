@@ -2,17 +2,18 @@
 
 import React from "react";
 import { ShoppingCart } from "lucide-react";
-import { useCart } from "../../Context/CartContext";
+import { useCart } from "../../../Context/CartContext";
 import ProductSummery from "./ProductSummery";
 
 export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
   const { state, dispatch } = useCart();
 
+
   return (
     <>
       {/* drawer component */}
       <div
-        className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transform transition-transform duration-900 ease-in-out ${
+        className={`fixed top-0 right-0 z-40 h-screen  overflow-y-auto transform transition-transform duration-900 all ease-in-out ${
           rightNavOpen ? "translate-x-0" : "translate-x-full"
         } bg-white w-full md:w-2/4 dark:bg-gray-800`}
         tabIndex={-1}
@@ -20,7 +21,7 @@ export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
       >
         <h5
           id="drawer-right-label"
-          className="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"
+          className="inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400 m-4"
         >
           <ShoppingCart />
           Your Cart
@@ -47,9 +48,19 @@ export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
           </svg>
           <span className="sr-only">Close menu</span>
         </button>
-        <div className="mt-8 border-t pt-8">
-          <ProductSummery />
+        {state.items.length == 0 ? (
+        <div className="text-2xl font-bold text-center">Your cart is empty</div>
+      ) : (<>
+        <div className="mt-8 border-t pt-4">
+        <ProductSummery />
+      </div>
+      <div className="sticky bottom-0 w-full">
+          <button className="w-1/2 bg-red-500 hover:bg-red-700 text-white p-3">Clear Cart</button>
+          <button className="w-1/2 bg-green-500 p-3 hover:bg-green-700 text-white">CheckOut</button>
         </div>
+        </>
+      )}
+       
       </div>
     </>
   );

@@ -1,8 +1,8 @@
 import Footer from "./components/Footer";
-import ProductGrid from "./components/ProductGrid";
+import ProductGrid from "./components/customer/ProductGrid";
 import Header from "./components/Header";
 import { Suspense } from 'react';
-import { CardsSkeleton } from './components/Skeletons';
+import { CardsSkeleton } from './components/customer/Skeletons';
 
 
 export const metadata = {

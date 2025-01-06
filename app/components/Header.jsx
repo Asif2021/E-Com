@@ -5,9 +5,9 @@ import Link from "next/link";
 import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { redirect, usePathname } from "next/navigation";
 import clsx from "clsx";
-import LogoutModal from "./LogoutModal";
+import LogoutModal from "./customer/LogoutModal";
 import { useCart } from "../../Context/CartContext";
-import RightNav from "./RightNav";
+import RightNav from "./customer/RightNav";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -170,8 +170,7 @@ export default function Navbar() {
           {/* shopping cart in mobile view  */}
           <div
             className="relative cursor-pointer md:hidden mx-2"
-            onClick={handleRightNav}
-          >
+            onClick={handleRightNav}>
             <ShoppingCart />
             <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
               {state.items.length}

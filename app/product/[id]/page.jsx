@@ -1,5 +1,5 @@
 import { ProductData } from '../../components/ProductData';
-import ProductDetails from '../../components/ProductDetails'
+import ProductDetails from '../../components/customer/ProductDetails'
 
 export async function generateStaticParams() {
   

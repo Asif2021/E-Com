@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "../../Context/CartContext";
+import { useCart } from "../../../Context/CartContext";
 import {  ShoppingCart } from "lucide-react";
 
 
@@ -9,10 +9,10 @@ const ProductCard = ({product}) => {
 
    return (
     <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700 hover:scale-105 hover:shadow-lg">
-      <Link href={`/product/${product.id}`}>
+      <Link href={`/product/${product?.id}`}>
         <Image
           className="rounded-t-lg w-full h-48"
-          src={product.image}
+          src={product?.image}
           width={500}
           height={500}
           alt="product image"
@@ -21,7 +21,7 @@ const ProductCard = ({product}) => {
 
       <div className="px-5 pb-5">
         <h5 className="text-base md:text-xl mt-2 truncate font-semibold tracking-tight text-gray-900 dark:text-white">
-          {product.title}
+          {product?.title}
         </h5>
 
         {/* <div className="flex items-center mt-2.5 mb-5">
@@ -78,11 +78,11 @@ const ProductCard = ({product}) => {
       </div> */}
 
         <p className="truncate text-sm md:text-base my-3">
-          {product.description}
+          {product?.description}
         </p>
         <div className="flex items-center justify-between">
           <span className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
-            {product.price}
+            {product?.price}
           </span>
           <button
             onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}

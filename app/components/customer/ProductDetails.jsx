@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image';
-import { useCart } from '../../Context/CartContext';
+import { useCart } from '../../../Context/CartContext';
 
 const ProductDetails = ({product}) => {
       const { dispatch } = useCart();
