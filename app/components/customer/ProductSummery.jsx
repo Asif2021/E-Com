@@ -4,6 +4,8 @@ import { useCart } from "../../../Context/CartContext";
 const ProductSummery = () => {
   const { state, dispatch } = useCart();
 
+  console.log(state.items.price);
+
   return (
          <div className="relative overflow-x-auto shadow-md sm:rounded-lg px-3">
           <h2 className="text-2xl font-bold mb-4">Cart Summary</h2>
@@ -28,7 +30,7 @@ const ProductSummery = () => {
               </tr>
             </thead>
             <tbody>
-              {state.items.map((item) => (
+              {state.items.map((item, index) => (
                 <tr key={item.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td className="p-4">
                     <img
@@ -43,20 +45,16 @@ const ProductSummery = () => {
                   <td className="px-6 py-4">
                     <div className="flex items-center">
                       <button
-                        className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-white bg-red-700 border border-gray-300 rounded-full focus:outline-none"
+                        className="inline-flex items-center justify-center p-1 me-3 text-sm font-medium h-6 w-6 text-white bg-red-500 hover:bg-red-700 border border-gray-300 rounded-full focus:outline-none"
                         type="button"
-                      >
-                       -
-                      </button>
-                      <p>
+                        onClick={()=>dispatch({type:"DECREASE_FROM_CART", payload:item.id})}>-</button>
+                    
                       {item.quantity}
-                      </p>
+
                       <button
-                        className="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-white bg-green-700 border border-gray-300 rounded-full"
+                        className="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-white bg-green-500 hover:bg-green-700 border border-gray-300 rounded-full"
                         type="button"
-                      >
-                       +
-                      </button>
+                        onClick={()=>dispatch({type:"INCREASE_FROM_CART", payload:item.id})}>+</button>
                     </div>
                   </td>
                   <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
@@ -65,9 +63,9 @@ const ProductSummery = () => {
                   <td className="px-6 py-4">
                     <button
                       href="#"
-                      className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                      className="font-medium text-red-500 hover:text-red-700"
                       onClick={() =>
-                        dispatch({ type: "REMOVE_FROM_CART", payload: item.id })
+                        dispatch({ type:"DELETE_FROM_CART", payload:item.id })
                       }
                     >
                       <Trash2 />
@@ -77,7 +75,7 @@ const ProductSummery = () => {
               ))}
             </tbody>
           </table>
-        </div>
+          </div>
   );
 };
 export default ProductSummery;

@@ -4,10 +4,15 @@ import React from "react";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../../../Context/CartContext";
 import ProductSummery from "./ProductSummery";
+import { type } from "os";
 
 export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
   const { state, dispatch } = useCart();
 
+function handleClearCart() {
+  dispatch({type:"CLEAR_CART"})
+setRightNavOpen(!rightNavOpen)
+}
 
   return (
     <>
@@ -17,14 +22,13 @@ export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
           rightNavOpen ? "translate-x-0" : "translate-x-full"
         } bg-white w-full md:w-2/4 dark:bg-gray-800`}
         tabIndex={-1}
-        aria-labelledby="drawer-right-label"
-      >
+        aria-labelledby="drawer-right-label">
+          
         <h5
           id="drawer-right-label"
-          className="inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400 m-4"
-        >
+          className="inline-flex items-center text-base font-semibold text-gray-500 dark:text-gray-400 m-4">
           <ShoppingCart />
-          Your Cart
+       <span className="ml-2">Your Cart</span>
         </h5>
         <button
           type="button"
@@ -48,6 +52,7 @@ export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
           </svg>
           <span className="sr-only">Close menu</span>
         </button>
+        
         {state.items.length == 0 ? (
         <div className="text-2xl font-bold text-center">Your cart is empty</div>
       ) : (<>
@@ -55,9 +60,9 @@ export default function RightDrawer({ rightNavOpen, setRightNavOpen }) {
         <ProductSummery />
       </div>
       <div className="sticky bottom-0 w-full">
-          <button className="w-1/2 bg-red-500 hover:bg-red-700 text-white p-3">Clear Cart</button>
+          <button className="w-1/2 bg-red-500 hover:bg-red-700 text-white p-3" onClick={handleClearCart}>Clear Cart</button>
           <button className="w-1/2 bg-green-500 p-3 hover:bg-green-700 text-white">CheckOut</button>
-        </div>
+      </div>
         </>
       )}
        

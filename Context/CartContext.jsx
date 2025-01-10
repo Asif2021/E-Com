@@ -1,7 +1,8 @@
 "use client"
+
 import React, { createContext, useContext, useReducer } from "react"
 
-const CartContext = createContext(undefined)
+const CartContext = createContext()
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -14,8 +15,7 @@ const cartReducer = (state, action) => {
           ...state,
           items: state.items.map(item =>
             item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
+              ? { ...item, quantity: item.quantity + 1 }: item
           ),
           total: state.total + action.payload.price
         }
@@ -26,20 +26,35 @@ const cartReducer = (state, action) => {
           total: state.total + action.payload.price
         }
       }
-    case "REMOVE_FROM_CART":
+    case "INCREASE_FROM_CART":
+    return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === action.payload
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        )
+    }
+
+    case "DECREASE_FROM_CART":
       const itemToRemove = state.items.find(item => item.id === action.payload)
       if (!itemToRemove) return state
       return {
         ...state,
-        items: state.items
-          .map(item =>
-            item.id === action.payload
-              ? { ...item, quantity: item.quantity - 1 }
-              : item
-          )
-          .filter(item => item.quantity > 0),
+        items: state.items.map(item =>item.id === action.payload ? { ...item, quantity: item.quantity - 1 } : item).filter(item => item.quantity > 0),
         total: state.total - itemToRemove.price
       }
+
+      case "DELETE_FROM_CART":
+        return {
+          ...state,
+          items: state.items.filter(item => item.id !== action.payload),
+        };
+      case "CLEAR_CART":
+        return{
+          items:[]
+        }
+        
     default:
       return state
   }

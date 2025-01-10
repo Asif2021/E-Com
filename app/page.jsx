@@ -1,6 +1,5 @@
 import Footer from "./components/Footer";
 import ProductGrid from "./components/customer/ProductGrid";
-import Header from "./components/Header";
 import { Suspense } from 'react';
 import { CardsSkeleton } from './components/customer/Skeletons';
 
