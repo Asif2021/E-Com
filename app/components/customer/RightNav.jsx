@@ -18,7 +18,7 @@ setRightNavOpen(!rightNavOpen)
     <>
       {/* drawer component */}
       <div
-        className={`fixed top-0 right-0 z-40 h-screen  overflow-y-auto transform transition-transform duration-900 all ease-in-out ${
+        className={`fixed top-0 right-0 z-40 h-screen shadow-xl overflow-y-auto transform transition-transform duration-900 all ease-in-out ${
           rightNavOpen ? "translate-x-0" : "translate-x-full"
         } bg-white w-full md:w-2/4 dark:bg-gray-800`}
         tabIndex={-1}

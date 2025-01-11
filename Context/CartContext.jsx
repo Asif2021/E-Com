@@ -2,7 +2,11 @@
 
 import React, { createContext, useContext, useReducer } from "react"
 
-const CartContext = createContext()
+const CartContext = createContext();
+
+const initialState = {
+  items: [], 
+};
 
 const cartReducer = (state, action) => {
   switch (action.type) {
@@ -17,14 +21,12 @@ const cartReducer = (state, action) => {
             item.id === action.payload.id
               ? { ...item, quantity: item.quantity + 1 }: item
           ),
-          total: state.total + action.payload.price
         }
       } else {
         return {
           ...state,
           items: [...state.items, { ...action.payload, quantity: 1 }],
-          total: state.total + action.payload.price
-        }
+         }
       }
     case "INCREASE_FROM_CART":
     return {
@@ -42,8 +44,7 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         items: state.items.map(item =>item.id === action.payload ? { ...item, quantity: item.quantity - 1 } : item).filter(item => item.quantity > 0),
-        total: state.total - itemToRemove.price
-      }
+        }
 
       case "DELETE_FROM_CART":
         return {
@@ -61,7 +62,7 @@ const cartReducer = (state, action) => {
 }
 
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0 })
+  const [state, dispatch] = useReducer(cartReducer, initialState)
 
   return (
     <CartContext.Provider value={{ state, dispatch }}>

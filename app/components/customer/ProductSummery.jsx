@@ -1,10 +1,10 @@
 import { Trash2 } from "lucide-react";
 import { useCart } from "../../../Context/CartContext";
+import Image from "next/image";
 
 const ProductSummery = () => {
   const { state, dispatch } = useCart();
-
-  console.log(state.items.price);
+  const grandTotal = state.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
          <div className="relative overflow-x-auto shadow-md sm:rounded-lg px-3">
@@ -30,13 +30,16 @@ const ProductSummery = () => {
               </tr>
             </thead>
             <tbody>
-              {state.items.map((item, index) => (
+              {state.items.map((item, index) => {
+                return (
                 <tr key={item.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td className="p-4">
-                    <img
+                    <Image
                       src={item.image}
                       className="w-16 md:w-32 h-20 contain-size rounded-xl"
                       alt="Apple Watch"
+                      width={200}
+                      height={150}
                     />
                   </td>
                   <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
@@ -58,12 +61,12 @@ const ProductSummery = () => {
                     </div>
                   </td>
                   <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-                    {item.price}
+                    {item.price * item.quantity}
+                    <div className="normal-case text-gray-500 text-base">${item.price}/perItem</div>
                   </td>
                   <td className="px-6 py-4">
                     <button
-                      href="#"
-                      className="font-medium text-red-500 hover:text-red-700"
+                        className="font-medium text-red-500 hover:text-red-700"
                       onClick={() =>
                         dispatch({ type:"DELETE_FROM_CART", payload:item.id })
                       }
@@ -71,10 +74,11 @@ const ProductSummery = () => {
                       <Trash2 />
                     </button>
                   </td>
-                </tr>
-              ))}
+                </tr>)
+                      })}
             </tbody>
           </table>
+                    <div className="text-center font-bold text-2xl my-4">Grand Total = {grandTotal}</div>  
           </div>
   );
 };

@@ -82,7 +82,7 @@ const ProductCard = ({product}) => {
         </p>
         <div className="flex items-center justify-between">
           <span className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
-            {product?.price}
+           $ {product?.price}
           </span>
           <button
             onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}

@@ -1,9 +1,8 @@
 // Loading animation
-const shimmer ='before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
 
 export function CardSkeleton() {
     return (
-      <div className="max-w-5xl h-[20rem] bg-gray-200 rounded-lg animate-pulse">
+      <div className="max-w-5xl w-full h-[20rem] bg-gray-200 rounded-lg animate-pulse">
       <div className="h-48 w-full bg-gray-300 rounded-t-lg mb-4">
       </div>
       <div className="px-5 pb-5">
