@@ -1,11 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "../../../Context/CartContext";
-import {  ShoppingCart } from "lucide-react";
+import {  ShoppingCart, Trash } from "lucide-react";
+import { toast } from 'react-hot-toast';
+import { useState } from "react";
+
 
 
 const ProductCard = ({product}) => {
-  const { dispatch } = useCart()
+  const { dispatch } = useCart();
+  const [showCart, setShowCart] = useState(true);
+
+  const handleDispatchProduct = ()=>{
+    dispatch({ type: 'ADD_TO_CART', payload: product })
+    toast.success('Product Added to Cart!');
+    setShowCart(!showCart)}
+
+  const handleRemoveProduct = ()=>{
+    dispatch({type:"DELETE_FROM_CART", payload:product.id});
+    toast.error('Product Removed from Cart!');
+    setShowCart(!showCart)}
 
    return (
     <div className="max-w-xs h-[20rem] bg-white border border-gray-200 rounded-lg  dark:bg-gray-800 dark:border-gray-700 hover:scale-105 hover:shadow-lg">
@@ -84,17 +98,30 @@ const ProductCard = ({product}) => {
           <span className="text-lg md:text-2xl font-bold text-gray-900 dark:text-white">
            $ {product?.price}
           </span>
-          <button
-            onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}
+          {showCart ? <button
+            onClick={handleDispatchProduct}
             className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Add to cart
-          </button>
-          <button 
-          onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}
+          </button> : <button
+            onClick={handleRemoveProduct}
+            className="hidden md:block text-red-700 border border-red-300 hover:bg-red-200 font-medium rounded-lg text-sm px-3 py-2 text-center"
+          >
+            Remove from Cart
+          </button> }
+         {
+          showCart ? <button 
+          onClick={handleDispatchProduct}
           className="block md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <ShoppingCart />
+          </button> : 
+          <button 
+          onClick={handleRemoveProduct}
+          className="block md:hidden text-red-700 border border-red-700 hover:bg-red-200 font-medium rounded-lg text-sm px-3 py-2 text-center">
+          <Trash />
           </button>
+         }
+          
         </div>
       </div>
     </div>

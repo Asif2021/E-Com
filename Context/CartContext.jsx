@@ -1,6 +1,6 @@
 "use client"
 
-import React, { createContext, useContext, useReducer } from "react"
+import React, { createContext, useContext, useReducer, useState } from "react";
 
 const CartContext = createContext();
 
@@ -38,15 +38,19 @@ const cartReducer = (state, action) => {
         )
     }
 
-    case "DECREASE_FROM_CART":
-      const itemToRemove = state.items.find(item => item.id === action.payload)
-      if (!itemToRemove) return state
-      return {
-        ...state,
-        items: state.items.map(item =>item.id === action.payload ? { ...item, quantity: item.quantity - 1 } : item).filter(item => item.quantity > 0),
-        }
+          case "DECREASE_FROM_CART":
+        const itemToRemove = state.items.find(item => item.id === action.payload);
+        if (!itemToRemove || itemToRemove.quantity === 1) return state; // Prevent removal if only one item left
+        return {
+          ...state,
+          items: state.items.map(item => 
+            item.id === action.payload
+              ? { ...item, quantity: item.quantity - 1 }
+              : item
+          )
+        };
 
-      case "DELETE_FROM_CART":
+        case "DELETE_FROM_CART":
         return {
           ...state,
           items: state.items.filter(item => item.id !== action.payload),
@@ -63,9 +67,10 @@ const cartReducer = (state, action) => {
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState)
+  const [showCart, setShowCart]= useState(true);
 
   return (
-    <CartContext.Provider value={{ state, dispatch }}>
+    <CartContext.Provider value={{ state, dispatch, showCart, setShowCart}}>
       {children}
     </CartContext.Provider>
   )

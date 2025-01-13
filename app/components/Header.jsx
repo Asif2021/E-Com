@@ -149,7 +149,7 @@ export default function Navbar() {
                       onMouseLeave={() => setIsProfileOpen(false)}
                       className="absolute right-0 px-2 py-2 w-24 text-sm text-gray-700 bg-gray-100 hover:bg-gray-400 rounded-md font-medium items-center text-center"
                     >
-                      <LogoutModal />
+                      <LogoutModal setIsProfileOpen={setIsProfileOpen} isProductsOpen={isProductsOpen} />
                     </div>
                   )}
                 </div>

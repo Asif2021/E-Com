@@ -1,9 +1,24 @@
 'use client'
 import Image from 'next/image';
 import { useCart } from '../../../Context/CartContext';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const ProductDetails = ({product}) => {
       const { dispatch } = useCart();
+      const [showCart, setShowCart] = useState(true);
+
+      const handleDispatchProduct = ()=>{
+        dispatch({ type: 'ADD_TO_CART', payload: product })
+        toast.success('Product Added to Cart!');
+        setShowCart(!showCart)}
+    
+      const handleRemoveProduct = ()=>{
+        dispatch({type:"DECREASE_FROM_CART", payload:product.id});
+        toast.error('Product Removed from Cart!');
+        setShowCart(!showCart)}
+    
+      
     
   return (
     <section className="bg-white my-10">
@@ -20,12 +35,12 @@ const ProductDetails = ({product}) => {
           </div>
           <div className="space-x-2 overflow-auto text-center whitespace-nowrap">
             <a className="inline-block border border-gray-200 p-1 rounded-md hover:border-blue-500 cursor-pointer">
-              <img
+              <Image
                 className="w-14 h-14"
                 src={product.image} 
                 alt={product.title} 
-                 width={500} 
-                height={500}
+                 width={100} 
+                height={100}
               />
             </a>
           </div>
@@ -65,9 +80,17 @@ const ProductDetails = ({product}) => {
           </p>
 
           <div className="flex flex-wrap gap-2 mb-5">
-            <button  onClick={() => dispatch({ type: 'ADD_TO_CART', payload: product })}  className="px-4 py-2 inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">
-           Add to cart
-            </button>
+          {showCart ? <button
+            onClick={handleDispatchProduct}
+            className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Add to cart
+          </button> : <button
+            onClick={handleRemoveProduct}
+            className="hidden md:block text-red-700 font-medium rounded-lg text-sm px-3 py-2 text-center border border-red-300 hover:bg-red-200"
+          >
+            Remove from Cart
+          </button> }
           </div>
 
           <ul className="mb-5">
