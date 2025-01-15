@@ -2,7 +2,7 @@
 
 export function CardSkeleton() {
     return (
-      <div className="max-w-5xl w-full h-[20rem] bg-gray-200 rounded-lg animate-pulse">
+      <div className="max-w-5xl w-64 h-[20rem] bg-gray-200 rounded-lg animate-pulse">
       <div className="h-48 w-full bg-gray-300 rounded-t-lg mb-4">
       </div>
       <div className="px-5 pb-5">
