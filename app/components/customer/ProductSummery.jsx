@@ -1,10 +1,21 @@
 import { Trash2 } from "lucide-react";
 import { useCart } from "../../../Context/CartContext";
 import Image from "next/image";
+import { toast } from 'react-hot-toast';
+
 
 const ProductSummery = () => {
-  const { state, dispatch } = useCart();
+  const { state, dispatch, } = useCart();
+  
+  // for counting grandTotal of the cart
   const grandTotal = state.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  // Delete from cart
+  const handleDeleteCart = (id) => {
+    dispatch({ type:"DELETE_FROM_CART", payload: id });
+    toast.error('Product Removed from Cart!');}
+
+
 
   return (
          <div className="relative overflow-x-auto shadow-md sm:rounded-lg px-3">
@@ -67,9 +78,7 @@ const ProductSummery = () => {
                   <td className="px-6 py-4">
                     <button
                         className="font-medium text-red-500 hover:text-red-700"
-                      onClick={() =>
-                        dispatch({ type:"DELETE_FROM_CART", payload:item.id })
-                      }
+                      onClick={() => handleDeleteCart(item.id)}
                     >
                       <Trash2 />
                     </button>
