@@ -10,7 +10,7 @@ const ProductCard = ({product}) => {
 
   
   // dispatch product to cart
-  const handleDispatchProduct = ()=>{
+  const handleDispatchProduct = () => {
     dispatch({ type: 'ADD_TO_CART', payload: product });
     toast.success('Product Added to Cart!');}
     

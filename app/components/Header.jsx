@@ -8,6 +8,8 @@ import clsx from "clsx";
 import LogoutModal from "./customer/LogoutModal";
 import { useCart } from "../../Context/CartContext";
 import RightNav from "./customer/RightNav";
+import MenuLinks from '../components/customer/MenuLinks'
+
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -66,50 +68,7 @@ export default function Navbar() {
 
             {/* Desktop View  */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                <Link href="/" className={clsx("text-gray-800 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium",
-                    isLinkActive("/") ? "text-blue-500 font-extrabold" : "text-gray-800 hover:text-gray-900")}>
-                  Home
-                </Link>
-                <div
-                  className="relative"
-                  onMouseEnter={() => setIsProductsOpen(true)}
-                  onMouseLeave={() => setIsProductsOpen(false)}>
-                  <Link
-                    href="/"
-                    className={clsx("text-gray-800 px-3 py-2 rounded-md text-sm font-medium inline-flex items-center",
-                      isLinkActive("/")
-                        ? "text-blue-500 font-extrabold"
-                        : "text-gray-800 hover:text-gray-900")}>
-                    Categories
-                    <ChevronDown className="ml-1 h-4 w-4" />
-                  </Link>
-                  {isProductsOpen && (
-                    <div
-                      onMouseLeave={() => setIsProductsOpen(false)}
-                      className="absolute left-0 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                      <div
-                        className="py-0"
-                        role="menu"
-                        aria-orientation="vertical"
-                        aria-labelledby="options-menu">
-                        <Link
-                          href="/"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md font-medium items-center"
-                          role="menuitem">
-                          Shoes
-                        </Link>
-                        <Link
-                          href="/"
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md font-medium items-center"
-                          role="menuitem">
-                          Cloths
-                        </Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+            <MenuLinks/>
             </div>
           </div>
           <div className="hidden md:block">
@@ -203,7 +162,10 @@ export default function Navbar() {
 
       {isMenuOpen && (
         <div className="md:hidden" id="mobile-menu">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="block md:hidden">
+            <MenuLinks/>
+            </div>
+          {/* <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link
               href="/"
               className={clsx(
@@ -249,7 +211,8 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
+
           {/* if user is loggedIn then display username in Mobile View else displaying Links of Login and SignUp */}
           {isLoggedIn ? (
             <div className="relative" onClick={() => setIsProfileOpen(true)}>

@@ -1,22 +1,23 @@
 'use client'
 import Image from 'next/image';
 import { useCart } from '../../../Context/CartContext';
-import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 const ProductDetails = ({product}) => {
-      const { dispatch } = useCart();
-      const [showCart, setShowCart] = useState(true);
+      const { state, dispatch } = useCart();
+      
+      // check if product is in cart...
+    const isProductInCart = state.items.some(item => item.id === product?.id);
 
       const handleDispatchProduct = ()=>{
         dispatch({ type: 'ADD_TO_CART', payload: product })
         toast.success('Product Added to Cart!');
-        setShowCart(!showCart)}
+        }
     
-      const handleRemoveProduct = ()=>{
-        dispatch({type:"DECREASE_FROM_CART", payload:product.id});
+      const handleRemoveProduct = (productId)=>{
+        dispatch({type:"DELETE_FROM_CART", payload:productId});
         toast.error('Product Removed from Cart!');
-        setShowCart(!showCart)}
+        }
     
       
     
@@ -28,8 +29,8 @@ const ProductDetails = ({product}) => {
           <div className="border border-gray-200 shadow-sm p-3 text-center rounded mb-5">
             <Image
               className="object-cover inline-block h-72"
-              src={product.image} 
-              alt={product.title} 
+              src={product?.image} 
+              alt={product?.title} 
                width={500} 
               height={500} />
           </div>
@@ -37,8 +38,8 @@ const ProductDetails = ({product}) => {
             <a className="inline-block border border-gray-200 p-1 rounded-md hover:border-blue-500 cursor-pointer">
               <Image
                 className="w-14 h-14"
-                src={product.image} 
-                alt={product.title} 
+                src={product?.image} 
+                alt={product?.title} 
                  width={100} 
                 height={100}
               />
@@ -46,7 +47,7 @@ const ProductDetails = ({product}) => {
           </div>
         </aside>
         <main>
-          <h2 className="font-semibold text-2xl mb-4">{product.title}</h2>
+          <h2 className="font-semibold text-2xl mb-4">{product?.title}</h2>
 
           <div className="flex flex-wrap items-center space-x-2 mb-2">
             {/* <div className="ratings">
@@ -73,20 +74,20 @@ const ProductDetails = ({product}) => {
             <span className="text-green-500">Verified</span>
           </div>
 
-          <p className="mb-4 font-semibold text-xl">{product.price}</p>
+          <p className="mb-4 font-semibold text-xl">{product?.price}</p>
 
           <p className="mb-4 text-gray-500">
-           {product.description}
+           {product?.description}
           </p>
 
           <div className="flex flex-wrap gap-2 mb-5">
-          {showCart ? <button
+          {!isProductInCart ? <button
             onClick={handleDispatchProduct}
             className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Add to cart
           </button> : <button
-            onClick={handleRemoveProduct}
+            onClick={()=>handleRemoveProduct(product.id)}
             className="hidden md:block text-red-700 font-medium rounded-lg text-sm px-3 py-2 text-center border border-red-300 hover:bg-red-200"
           >
             Remove from Cart
