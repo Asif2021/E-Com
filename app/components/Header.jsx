@@ -165,55 +165,7 @@ export default function Navbar() {
           <div className="block md:hidden">
             <MenuLinks/>
             </div>
-          {/* <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              href="/"
-              className={clsx(
-                "text-gray-600 hover:text-gray-900 block px-3 py-2 rounded-md text-base font-medium",
-                isLinkActive("/")
-                  ? "text-blue-500 font-extrabold"
-                  : "text-gray-800 hover:text-gray-900"
-              )}
-            >
-              Home
-            </Link>
-            <div>
-              <button
-                onClick={toggleProducts}
-                className={clsx(
-                  "text-gray-800 px-3 py-2 rounded-md text-sm font-medium inline-flex items-center",
-                  isLinkActive("/")
-                    ? "text-blue-500 font-extrabold"
-                    : "text-gray-800 hover:text-gray-900"
-                )}
-              >
-                Categories
-                <ChevronDown
-                  className={`h-4 w-4 transform ${
-                    isProductsOpen ? "rotate-180" : ""
-                  } transition-transform duration-200`}
-                />
-              </button>
-              {isProductsOpen && (
-                <div className="pl-4">
-                  <Link
-                    href="/"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Shoes
-                  </Link>
-                  <Link
-                    href="/"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                  >
-                    Cloths
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div> */}
-
-          {/* if user is loggedIn then display username in Mobile View else displaying Links of Login and SignUp */}
+         {/* if user is loggedIn then display username in Mobile View else displaying Links of Login and SignUp */}
           {isLoggedIn ? (
             <div className="relative" onClick={() => setIsProfileOpen(true)}>
               <button className="ml-4 uppercase">{username}</button>

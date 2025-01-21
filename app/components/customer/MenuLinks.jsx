@@ -45,7 +45,7 @@ export default function NavLinks() {
                       key={subLink.name}
                       href={subLink.href}
                       onMouseLeave={()=>setIsDropdownOpen(!isDropdownOpen)}
-                      className="block text-sm text-gray-700">
+                      className="block text-sm p-2 text-gray-700">
                       {subLink.name}
                     </Link>
                   ))}

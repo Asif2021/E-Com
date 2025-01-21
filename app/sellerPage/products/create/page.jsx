@@ -1,6 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useActionState } from "react";
+import { createProduct } from "../../../../actions/productController";
 
 const page = () => {
+  const [formState, formAction] = useActionState(createProduct, {});
+
+    
   const categories = [
     "Electronics",
     "Cameras",
@@ -15,8 +22,7 @@ const page = () => {
               <h1 className="mb-3 text-xl md:text-3xl font-semibold text-black">
                 Create New Product
               </h1>
-
-              <form>
+              <form action={formAction}>
                 <div className="mb-4">
                   <label className="block mb-1"> Name </label>
                   <input
@@ -26,6 +32,9 @@ const page = () => {
                     name="name"
                     required
                   />
+                  {formState.errors?.name && (
+              <span className="text-red-600">{formState.errors?.name}</span>
+            )}
                 </div>
 
                 <div className="mb-4 mt-5">
@@ -37,6 +46,9 @@ const page = () => {
                     name="description"
                     required
                   ></textarea>
+                     {formState.errors?.description && (
+              <span className="text-red-600">{formState.errors?.description}</span>
+            )}
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-x-2 mt-5">
@@ -52,6 +64,9 @@ const page = () => {
                           required
                         />
                       </div>
+                      {formState.errors?.price && (
+              <span className="text-red-600">{formState.errors?.price}</span>
+            )}
                     </div>
                   </div>
                   <div className="mb-4">
@@ -92,6 +107,9 @@ const page = () => {
                       name="seller"
                       required
                     />
+                         {formState.errors?.seller && (
+              <span className="text-red-600">{formState.errors?.seller}</span>
+            )}
                   </div>
 
                   <div className="mb-4">
@@ -106,6 +124,9 @@ const page = () => {
                           required
                         />
                       </div>
+                      {formState.errors?.stock && (
+              <span className="text-red-600">{formState.errors?.stock}</span>
+            )}
                     </div>
                   </div>
                 </div>
