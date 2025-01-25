@@ -1,5 +1,6 @@
 import { ProductData } from '../../components/ProductData';
 import ProductDetails from '../../components/customer/ProductDetails'
+import React from 'react';
 
 export async function generateStaticParams() {
   

@@ -9,6 +9,7 @@ import LogoutModal from "./customer/LogoutModal";
 import { useCart } from "../../Context/CartContext";
 import RightNav from "./customer/RightNav";
 import MenuLinks from '../components/customer/MenuLinks'
+import React from "react";
 
 
 export default function Navbar() {

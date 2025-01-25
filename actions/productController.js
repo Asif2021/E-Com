@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use server"
 
 import { redirect } from "next/navigation";
@@ -95,6 +96,29 @@ async function sharedProductLogic(formData, user) {
       return redirect("/sellerPage/products");
   
   //   return { message: "Congratulations" };
+  };
+
+  export const editProduct = async function (prevState, formData) {
+    const user = await getUserFromCookie();
+    if (!user) {
+      return redirect("/");
+    }
+    const result = await sharedProductLogic(formData, user);
+  
+    if(result.errors.name || result.errors.description || result.errors.price || result.errors.seller || result.errors.stock ){
+      return {errors: result.errors}
+      }
+      // if there is no error lets save into our db
+      const productCollection = await getCollection("product")
+      let productId = formData.get("productId")
+      if(typeof productId != "string") productId = ""
+      // make sure you are the author of this post !!! otherwise operation failed
+      const productInQuestion = await productCollection.findOne({_id:ObjectId.createFromHexString(productId)})
+      if(productInQuestion.author.toString() !== user.userId){
+        return redirect("/")
+      }
+      await productCollection.findOneAndUpdate({ _id: ObjectId.createFromHexString(productId)}, {$set: result.ourProduct})
+      return redirect("/sellerPage/products")
   };
 
   export const deleteProduct = async function (formData){

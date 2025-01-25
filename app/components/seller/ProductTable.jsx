@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { ObjectId } from "mongodb";
 import { Search, CirclePlus, Pencil, Trash2 } from "lucide-react";
-import { getCollection } from "../../../lib/db";
+import { getCollection } from "@/lib/db";
 import Tooltip from "../Tooltip";
-import { deleteProduct } from "../../../actions/productController";
+import { deleteProduct } from "@/actions/productController";
+import React from "react";
 
 async function getProduct(id) {
   const collection = await getCollection("product");
@@ -72,23 +73,22 @@ const ProductTable = async (props) => {
               </tr>
             </thead>
             <tbody>
-              {product.map((product) => {
+              {product?.map((product) => {
                 return (
                   <tr
                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                    key={product.id}
-                  >
+                    key={product.id}>
                     <td className="px-6 py-2">Image of product</td>
                     <td className="px-6 py-2">{product?.name}</td>
                     <td className="px-6 py-2">{product?.description}</td>
                     <td className="px-6 py-2">{product?.price}</td>
                     <td className="px-6 py-2">{product?.stock}</td>
                     <td className="px-6 py-4 flex justify-items-center justify-around">
-                      <button className="border border-solid p-2 rounded-md hover:bg-gray-400">
+                      <Link href={`/sellerPage/products/edit-product/${product._id.toString()}`} className="border border-solid p-2 rounded-md hover:bg-gray-400">
                         <Tooltip text="Edit">
                           <Pencil width={15} />
                         </Tooltip>
-                      </button>
+                      </Link>
 
                         {/* Delete Product */}
                       <form action={deleteProduct}>
