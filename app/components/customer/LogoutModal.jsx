@@ -4,7 +4,6 @@ import { useState } from 'react';
 import {logout} from '../../../actions/userController'
 
 const LogoutModal = ({setIsProfileOpen, isProductsOpen}) => {
-  console.log(setIsProfileOpen); 
   const [isOpen, setIsOpen] = useState(false)
 
   const openModal = () => setIsOpen(true)

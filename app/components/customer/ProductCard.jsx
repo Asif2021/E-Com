@@ -15,12 +15,12 @@ const ProductCard = ({product}) => {
     toast.success('Product Added to Cart!');}
     
     // check if product is in cart...
-    const isProductInCart = state.items.some(item => item.id === product.id);
+    // const isProductInCart = state.items.some(item => item.id === product.id);
     
     // remove product from cart
-    const handleRemoveProduct = ()=>{
-      dispatch({type:"DELETE_FROM_CART", payload:product.id});
-      toast.error('Product Removed from Cart!')}
+    // const handleRemoveProduct = ()=>{
+    //   dispatch({type:"DELETE_FROM_CART", payload:product.id});
+    //   toast.error('Product Removed from Cart!')}
       
 
    return (
@@ -103,32 +103,20 @@ const ProductCard = ({product}) => {
 
           {/* Desktop view */}
           {/* if product is not in the cart then show add-to-cart button else show remove-from-cart button */}
-          {!isProductInCart ? <button
+           <button
             onClick={handleDispatchProduct}
             className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Add to cart
-          </button> : <button
-            onClick={handleRemoveProduct}
-            className="hidden md:block text-red-700 border border-red-300 hover:bg-red-200 font-medium rounded-lg text-sm px-3 py-2 text-center"
-          >
-            Remove from Cart
-          </button> }
+          </button> 
 
           {/* Mobile view */}
           {/* if product is not in the cart then show add-to-cart button else show remove-from-cart button */}
-         {
-          !isProductInCart ? <button 
+          <button 
           onClick={handleDispatchProduct}
           className="block md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <ShoppingCart />
-          </button> : 
-          <button 
-          onClick={handleRemoveProduct}
-          className="block md:hidden text-red-700 border border-red-700 hover:bg-red-200 font-medium rounded-lg text-sm px-3 py-2 text-center">
-          <Trash />
           </button>
-         }
           
         </div>
       </div>

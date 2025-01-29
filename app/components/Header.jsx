@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
 import { redirect, usePathname } from "next/navigation";
-import clsx from "clsx";
 import LogoutModal from "./customer/LogoutModal";
 import { useCart } from "../../Context/CartContext";
 import RightNav from "./customer/RightNav";
@@ -21,6 +20,9 @@ export default function Navbar() {
   const [rightNavOpen, setRightNavOpen] = useState(false);
   const pathname = usePathname();
   const { state } = useCart();
+  
+// get the total quantity to show on Cart icon in 
+  const totalQuantity = state.items.reduce((acc, item) => acc + item.quantity, 0);
 
   // Fetch auth status from the API
   useEffect(() => {
@@ -87,7 +89,7 @@ export default function Navbar() {
               <div className="relative cursor-pointer" onClick={handleRightNav}>
                 <ShoppingCart />
                 <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-                  {state.items.length}
+                  {totalQuantity}
                 </div>
               </div>
               {rightNavOpen && (

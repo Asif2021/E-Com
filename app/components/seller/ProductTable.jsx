@@ -24,9 +24,9 @@ const ProductTable = async (props) => {
         <div>You have not uploaded any product yet.. <strong> Upload Now</strong> </div>
         <Link
               href="/sellerPage/products/create"
-              className="flex border text-white bg-blue-700 hover:bg-blue-500 items-center p-2 rounded-md"
+              className="flex justify-center border text-white bg-blue-700 hover:bg-blue-500  p-2 rounded-md w-full md:w-40"
             >
-              Create Product <CirclePlus />
+              Create Product <CirclePlus className="ml-2" />
             </Link></>
       ) : (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -74,10 +74,10 @@ const ProductTable = async (props) => {
             </thead>
             <tbody>
               {product?.map((product) => {
-                return (
+               return (
                   <tr
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                    key={product.id}>
+                    className="bg-white border-b hover:bg-gray-100"
+                    key={product._id}>
                     <td className="px-6 py-2">Image of product</td>
                     <td className="px-6 py-2">{product?.name}</td>
                     <td className="px-6 py-2">{product?.description}</td>
