@@ -38,10 +38,7 @@ export default function Navbar() {
   const toggleProducts = () => {
     setIsProductsOpen(!isProductsOpen);
   };
-  const handleRightNav = () => {
-    !isLoggedIn ? redirect("/login") : setRightNavOpen(!rightNavOpen);
-  };
-
+ 
   const isLinkActive = (href) => pathname === href;
 
   return (
@@ -86,7 +83,7 @@ export default function Navbar() {
                   className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              <div className="relative cursor-pointer" onClick={handleRightNav}>
+              <div className="relative cursor-pointer" onClick={()=>setRightNavOpen(!rightNavOpen)}>
                 <ShoppingCart />
                 <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
                   {totalQuantity}
@@ -132,10 +129,10 @@ export default function Navbar() {
           {/* shopping cart in mobile view  */}
           <div
             className="relative cursor-pointer md:hidden mx-2"
-            onClick={handleRightNav}>
+            onClick={()=>setRightNavOpen(!rightNavOpen)}>
             <ShoppingCart />
             <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-              {state.items.length}
+              {totalQuantity}
             </div>
           </div>
           {rightNavOpen && (

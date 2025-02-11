@@ -2,6 +2,7 @@ import { Trash2 } from "lucide-react";
 import { useCart } from "../../../Context/CartContext";
 import Image from "next/image";
 import { toast } from 'react-hot-toast';
+import React from 'react'
 
 
 const ProductSummery = () => {
@@ -9,6 +10,7 @@ const ProductSummery = () => {
   
   // for counting grandTotal of the cart
   const grandTotal = state.items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 
   // Delete from cart
   const handleDeleteCart = (id) => {
@@ -42,6 +44,8 @@ const ProductSummery = () => {
             </thead>
             <tbody>
               {state.items.map((item, index) => {
+                const stock = item.stock
+                console.log(stock)
                 return (
                 <tr key={item.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td className="p-4">
@@ -68,6 +72,7 @@ const ProductSummery = () => {
                       <button
                         className="inline-flex items-center justify-center h-6 w-6 p-1 ms-3 text-sm font-medium text-white bg-green-500 hover:bg-green-700 border border-gray-300 rounded-full"
                         type="button"
+                        disabled={stock === 0}
                         onClick={()=>dispatch({type:"INCREASE_FROM_CART", payload:item.id})}>+</button>
                     </div>
                   </td>
@@ -78,7 +83,7 @@ const ProductSummery = () => {
                   <td className="px-6 py-4">
                     <button
                         className="font-medium text-red-500 hover:text-red-700"
-                      onClick={() => handleDeleteCart(item.id)}
+                       onClick={() => handleDeleteCart(item.id)}
                     >
                       <Trash2 />
                     </button>

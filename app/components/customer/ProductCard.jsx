@@ -1,26 +1,30 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "../../../Context/CartContext";
-import {  ShoppingCart, Trash } from "lucide-react";
+import {  ShoppingCart, X, } from "lucide-react";
 import { toast } from 'react-hot-toast';
-
+import React from "react";
 
 const ProductCard = ({product}) => {
   const { state, dispatch } = useCart();
 
-  
+ 
   // dispatch product to cart
   const handleDispatchProduct = () => {
-    dispatch({ type: 'ADD_TO_CART', payload: product });
-    toast.success('Product Added to Cart!');}
+    if (product.stock > 0) {
+      dispatch({ type: 'ADD_TO_CART', payload: product });
+      toast.success('Product Added to Cart!');
+    } else {
+      toast.error('Product is out of stock!');
+    }
+  }
     
-    // check if product is in cart...
-    // const isProductInCart = state.items.some(item => item.id === product.id);
     
-    // remove product from cart
-    // const handleRemoveProduct = ()=>{
-    //   dispatch({type:"DELETE_FROM_CART", payload:product.id});
-    //   toast.error('Product Removed from Cart!')}
+// Find the product in the cart to get the updated stock
+const cartItem = state.items.find(item => item.id === product.id);
+
+// If product is in the cart, use its stock from the context, otherwise use productData stock
+const stock = cartItem ? cartItem.stock : product.stock;
       
 
    return (
@@ -105,17 +109,19 @@ const ProductCard = ({product}) => {
           {/* if product is not in the cart then show add-to-cart button else show remove-from-cart button */}
            <button
             onClick={handleDispatchProduct}
-            className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            disabled={stock === 0}
+            className={`hidden md:block text-white ${stock === 0 ? "bg-red-500 hover:bg-red-700" : "bg-blue-500 hover:bg-blue-700"} focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
           >
-            Add to cart
+             {stock === 0 ? "Out of Stock" : "Add to Cart"}
           </button> 
 
           {/* Mobile view */}
           {/* if product is not in the cart then show add-to-cart button else show remove-from-cart button */}
           <button 
           onClick={handleDispatchProduct}
-          className="block md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          <ShoppingCart />
+          disabled={stock === 0}
+          className={`block md:hidden ${stock === 0 ? "bg-red-700" : "bg-blue-500 hover:bg-blue-700"} text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}>
+          {stock === 0 ? <X/> : <ShoppingCart  />}
           </button>
           
         </div>

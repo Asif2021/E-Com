@@ -5,6 +5,7 @@ export const ProductData = [
         image: "/shoes/1.jpg",
         description:'Lorem ipsum ajkdas adskfjakl dsaklfaskl;f dsLorem ipsum ajkdas adskfjakl dsaklfaskl;f ds',
         price: 85,
+        stock:1,
       },
       {
         id: 2,
@@ -12,6 +13,7 @@ export const ProductData = [
         image: "/shoes/2.jpg",
         description:'Lorem ipsum ajkdas adskfjakl la;kdsfj al;sjf la;sjfklafddas',
         price: 55,
+        stock:4,
       },
       {
         id: 3,
@@ -19,6 +21,7 @@ export const ProductData = [
         image: "/shoes/3.jpg",
         description:'Lorem ipsum ajkdas adskfjakl',
         price: 59,
+        stock:2,
       },
       {
         id: 4,
@@ -26,6 +29,7 @@ export const ProductData = [
         image: "/shoes/4.jpg",
         description:'Lorem ipsum ajkdas adskfjakl Lorem ipsum ajkdas adskfjakl dsaklfaskl;f ds',
         price: 87,
+        stock:7,
       },
       {
         id: 5,
@@ -33,6 +37,7 @@ export const ProductData = [
         image: "/shoes/5.jpg",
         description:'Lorem ipsum ajkdas adskfjakl',
         price: 30,
+        stock:2,
       },
       {
         id: 6,
@@ -40,6 +45,7 @@ export const ProductData = [
         image: "/shoes/6.jpg",
         description:'Lorem ipsum ajkdas adskfjakl',
         price: 70,
+        stock:4,
       },
       {
         id: 7,
@@ -47,6 +53,7 @@ export const ProductData = [
         image: "/shoes/7.jpg",
         description:'Lorem ipsum ajkdas adskfjakl',
         price: 20,
+        stock:5,
       },
       {
         id: 8,
@@ -54,5 +61,6 @@ export const ProductData = [
         image: "/shoes/8.jpg",
         description:'Lorem ipsum ajkdas adskfjakl',
         price: 100,
+        stock:3,
       }
 ]

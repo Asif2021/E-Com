@@ -6,20 +6,21 @@ import { toast } from 'react-hot-toast';
 const ProductDetails = ({product}) => {
       const { state, dispatch } = useCart();
       
-      // check if product is in cart...
-    const isProductInCart = state.items.some(item => item.id === product?.id);
+// Find the product in the cart to get the updated stock
+const cartItem = state.items.find(item => item.id === product.id);
 
-      const handleDispatchProduct = ()=>{
-        dispatch({ type: 'ADD_TO_CART', payload: product })
-        toast.success('Product Added to Cart!');
-        }
-    
-      const handleRemoveProduct = (productId)=>{
-        dispatch({type:"DELETE_FROM_CART", payload:productId});
-        toast.error('Product Removed from Cart!');
-        }
-    
-      
+// If product is in the cart, use its stock from the context, otherwise use productData stock
+const stock = cartItem ? cartItem.stock : product.stock;
+
+const handleDispatchProduct = () => {
+  if (product.stock > 0) {
+    dispatch({ type: 'ADD_TO_CART', payload: product });
+    toast.success('Product Added to Cart!');
+  } else {
+    toast.error('Product is out of stock!');
+  }
+}
+          
     
   return (
     <section className="bg-white my-10">
@@ -81,17 +82,14 @@ const ProductDetails = ({product}) => {
           </p>
 
           <div className="flex flex-wrap gap-2 mb-5">
-          {!isProductInCart ? <button
+           <button
             onClick={handleDispatchProduct}
-            className="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            disabled={stock === 0}
+            className={`block text-white ${stock === 0 ? "bg-red-500 hover:bg-red-700" : "bg-blue-500 hover:bg-blue-700"} focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`}
+
           >
-            Add to cart
-          </button> : <button
-            onClick={()=>handleRemoveProduct(product.id)}
-            className="hidden md:block text-red-700 font-medium rounded-lg text-sm px-3 py-2 text-center border border-red-300 hover:bg-red-200"
-          >
-            Remove from Cart
-          </button> }
+              {stock === 0 ? "Out of Stock" : "Add to Cart"}
+          </button>  
           </div>
 
           <ul className="mb-5">
