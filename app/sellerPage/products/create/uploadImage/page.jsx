@@ -1,4 +1,12 @@
+'use client'
+import { useState } from "react"
+import React from "react"
+import { CldUploadWidget } from "next-cloudinary"
+
 const page = () => {
+  const [signature, setSignature] = useState("")
+  const [public_id, setPublic_id] = useState("")
+  const [version, setVersion] = useState("")
   return (
     <div>
        <main className="md:w-2/3 lg:w-3/4 px-4">
@@ -6,23 +14,36 @@ const page = () => {
               style={{ maxWidth: "480px" }}
               className="mt-1 mb-20 p-4 md:p-7 mx-auto rounded bg-white shadow-lg"
             >
-              <form>
+              <div>
                 <h2 className="mb-3 text-2xl font-semibold">
                   Upload Product Images
                 </h2>
 
                 <div className="mb-4 flex flex-col md:flex-row">
-                  <div className="w-full">
-                    <input
-                      className="form-control block w-full px-2 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none mt-8"
-                      type="file"
-                      id="formFile"
-                      multiple
-                    />
-                  </div>
+                  
+                  <CldUploadWidget
+                  onSuccess={(result, {widget})=>{
+                    console.log(result?.info)
+                    setSignature(result?.info.signature)
+                    setPublic_id(result?.info.public_id)
+                    setVersion(result?.info.version)
+                  }}
+                  signatureEndpoint="/widget-signature">
+                    {({ open }) => {
+                      return (
+                      <button className="btn btn-primary border border-gray-700 p-1 rounded" onClick={() => open()}>
+                            Upload an Image
+                      </button>
+                      );
+                      }}
+                      </CldUploadWidget>
                 </div>
+                {/* hidden inputs for cloudinary */}
+                      <input type="hidden" name="public_id" value={public_id} />
+                      <input type="hidden" name="version" value={version} />
+                      <input type="hidden" name="signature" value={signature} />
 
-                <div className="grid grid-cols-6 gap-2 my-5">
+                {/* <div className="grid grid-cols-6 gap-2 my-5">
                   <img
                     src={"/logo192.png"}
                     alt="Preview"
@@ -30,7 +51,7 @@ const page = () => {
                     width="50"
                     height="50"
                   />
-                </div>
+                </div> */}
 
                 <button
                   type="submit"
@@ -38,7 +59,7 @@ const page = () => {
                 >
                   Update
                 </button>
-              </form>
+              </div>
             </div>
           </main>
     </div>

@@ -5,7 +5,14 @@ import { redirect } from "next/navigation";
 import { getUserFromCookie } from "../lib/getUser";
 import { ObjectId } from "mongodb";
 import {getCollection} from '../lib/db'
-// import cloudinary from 'cloudinary'
+import cloudinary from 'cloudinary';
+
+
+const cloudinaryConfig = cloudinary.config({
+  cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 
 function isAlphaNumericWithBasics(text){
@@ -14,6 +21,9 @@ function isAlphaNumericWithBasics(text){
 }
 
 async function sharedProductLogic(formData, user) {
+  console.log(formData.get("signature"))
+  console.log(formData.get("public_id"))
+  console.log(formData.get("version"))
     const errors = {};
   
     const ourProduct = {
@@ -69,10 +79,10 @@ async function sharedProductLogic(formData, user) {
     if(ourProduct.stock.length == 0) errors.stock = "This field is required"
   
     //verify signature
-    // const expectedSignature = cloudinary.utils.api_sign_request({public_id:formData.get("public_id"), version:formData.get("version")},cloudinaryConfig.api_secret)
-    // if(expectedSignature === formData.get("signature")){
-    //   ourProduct.photo = formData.get("public_id")
-    // }
+    const expectedSignature = cloudinary.utils.api_sign_request({public_id:formData.get("public_id"), version:formData.get("version")},cloudinaryConfig.api_secret)
+    if(expectedSignature === formData.get("signature")){
+      ourProduct.photo = formData.get("public_id")
+    }
   
     return {
       errors,
