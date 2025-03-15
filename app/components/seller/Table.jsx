@@ -35,17 +35,20 @@ function Table(props) {
     </thead>
    
       {props.product?.map((product, index) => {
+       
        return (
         <tbody key={product._id}>
 <tr className="bg-white border-b hover:bg-gray-100">
 <td className="px-6 py-2">
   {product?.photo ? (
     <CldImage
+      priority // This gives the image loading priority
       width="60"
       height="60"
+      style={{ width: 'auto', height: 'auto' }}
       src={product.photo}
-      sizes="100vw"
-      alt="Description of my image"
+      sizes="80vw"
+      alt="image"
     />
   ) : (
     <div>No image available</div>
@@ -55,11 +58,11 @@ function Table(props) {
 <td className="px-6 py-2">{product?.description}</td>
 <td className="px-6 py-2">{product?.price}</td>
 <td className="px-6 py-2">{product?.stock}</td>
-<td className="px-6 py-4 flex justify-items-center justify-around">
+<td className="px-6 py-4">
+<div className="flex items-center justify-around">
   <Link
     href={`/sellerPage/products/edit-product/${product._id.toString()}`}
-    className="border border-solid p-2 rounded-md hover:bg-gray-400"
-  >
+    className="border border-solid p-2 rounded-md hover:bg-gray-400">
     <Tooltip text="Edit">
       <Pencil width={15} />
     </Tooltip>
@@ -78,6 +81,7 @@ function Table(props) {
       </Tooltip>
     </button>
   </form>
+</div>
 </td>
 </tr>
 </tbody>

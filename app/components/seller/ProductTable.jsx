@@ -25,7 +25,7 @@ async function getProduct(id) {
 
 const ProductTable = async (props) => {
   const product = await getProduct(props.user.userId);
-  console.log(product)
+ 
   return (
     <>
       {product?.length === 0 ? (

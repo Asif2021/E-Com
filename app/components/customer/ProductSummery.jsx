@@ -45,8 +45,7 @@ const ProductSummery = () => {
             <tbody>
               {state.items.map((item, index) => {
                 const stock = item.stock
-                console.log(stock)
-                return (
+               return (
                 <tr key={item.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                   <td className="p-4">
                     <Image
