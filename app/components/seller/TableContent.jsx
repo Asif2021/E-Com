@@ -150,9 +150,13 @@ function TableContent(props) {
         <div>
           <div className="mb-4 flex flex-col md:flex-row">
             <CldUploadWidget
+              // @ts-ignore
               onSuccess={(result, { widget }) => {
+                // @ts-ignore
                 setSignature(result?.info.signature);
+                // @ts-ignore
                 setPublic_id(result?.info.public_id);
+                // @ts-ignore
                 setVersion(result?.info.version);
               }}
               signatureEndpoint="/widget-signature"

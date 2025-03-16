@@ -9,17 +9,20 @@ import React from "react"
 
 
 async function getDoc(id){
-const haikusCollection = await getCollection("product")
-const result = await haikusCollection.findOne({_id:ObjectId.createFromHexString(id)})
-return result
+const productCollection = await getCollection("product")
+const result = await productCollection.findOne({_id:ObjectId.createFromHexString(id)})
+return JSON.parse(JSON.stringify(result)) //convert the MongoDB document into a plain JavaScript object
 }
 
-async function page(props) {
-const doc = await getDoc(props.params.id)
-const user = await getUserFromCookie()
-if(user.userId !== doc.author.toString()){
-  return redirect("/")
-}
+async function page({params }) {
+ // Properly await and access the id parameter
+ const { id } = await params;
+  const doc = await getDoc(id);
+const user = await getUserFromCookie();
+ if (!doc || user.userId !== doc.author) {
+    redirect("/")
+  }
+
 
 
   return (
