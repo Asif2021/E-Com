@@ -40,7 +40,7 @@ function TableContent(props) {
         )}
       </div>
 
-      <div className="mb-4 mt-5">
+      <div className="mb-2">
         <label className="block mb-1"> Description </label>
         <textarea
           // @ts-ignore
@@ -56,7 +56,7 @@ function TableContent(props) {
         )}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-x-2 mt-5">
+      <div className="grid md:grid-cols-2 gap-x-2">
         <div className="mb-4">
           <label className="block mb-1"> Price </label>
           <div className="relative">
@@ -103,7 +103,7 @@ function TableContent(props) {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-x-2 mt-5">
+      <div className="grid md:grid-cols-2 gap-x-2">
         <div className="mb-4">
           <label className="block mb-1"> Seller / Brand </label>
           <input
@@ -138,17 +138,13 @@ function TableContent(props) {
           </div>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row gap-2 w-full">
+      
         <input
           type="hidden"
           name="productId"
-          defaultValue={props.product?._id.toString()}
-        />
+          defaultValue={props.product?._id.toString()}/>   
 
-        {/* <Link className="my-2 px-4 py-2 text-center inline-block text-white bg-blue-400 border border-transparent rounded-md hover:bg-blue-500 w-full md:w-1/2"
-     href="/sellerPage/products/create/uploadImage">Upload Image</Link> */}
-        <div>
-          <div className="mb-4 flex flex-col md:flex-row">
+          <div className="flex flex-col md:flex-row gap-x-2 mt-4">
             <CldUploadWidget
               // @ts-ignore
               onSuccess={(result, { widget }) => {
@@ -168,7 +164,7 @@ function TableContent(props) {
                 }
                 return (
                   <button
-                    className="btn btn-primary border border-gray-700 p-1 rounded"
+                    className="border border-gray-400 p-1 rounded w-full py-2 px-3 hover:bg-black hover:text-white"
                     onClick={handleOpen}
                   >
                     Upload an Image
@@ -176,19 +172,18 @@ function TableContent(props) {
                 );
               }}
             </CldUploadWidget>
-          </div>
           {/* hidden inputs for cloudinary */}
           <input type="hidden" name="public_id" value={public_id} />
           <input type="hidden" name="version" value={version} />
           <input type="hidden" name="signature" value={signature} />
-        </div>
+       
         <button
           type="submit"
-          className="my-2 px-4 py-2 text-center inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 w-full md:w-1/2"
-        >
+          className="text-center inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 w-full py-2 px-3"
+          >
           Submit
         </button>
-      </div>
+          </div>
     </form>
   );
 }
