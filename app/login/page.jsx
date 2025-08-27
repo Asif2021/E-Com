@@ -6,13 +6,13 @@ import { ArrowLeft } from "lucide-react";
 
 
 
-const page = () => {
+const Page = () => {
   const [formState, formAction] = useActionState(login, {});
 
   return (
     <>
       <form action={formAction} className="space-y-3 max-w-[450px] mx-auto flex-1 rounded-lg border border-gray-300 shadow-2xl p-8  mt-0 md:mt-10">
-<Link href="/" className="flex font-mono"><ArrowLeft/> Go-Home</Link>
+<Link href="/" className="flex font-mono"><ArrowLeft/> Go Home</Link>
         <h2 className="flex justify-center font-bold uppercase text-3xl text-gray-800">
           LogIn
         </h2>
@@ -61,7 +61,7 @@ const page = () => {
         </button>
         <div className="text-lg">
           
-          Don't have account!
+          {`Don't have account!`}
           <Link
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-4 uppercase"
             href="/signUp"
@@ -74,4 +74,4 @@ const page = () => {
     </>
   );
 };
-export default page;
+export default Page;

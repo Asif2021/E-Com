@@ -3,7 +3,7 @@ import { useState } from "react"
 import React from "react"
 import { CldUploadWidget } from "next-cloudinary"
 
-const page = () => {
+const Page = () => {
   const [signature, setSignature] = useState("")
   const [public_id, setPublic_id] = useState("")
   const [version, setVersion] = useState("")
@@ -65,4 +65,4 @@ const page = () => {
     </div>
   )
 }
-export default page
+export default Page
