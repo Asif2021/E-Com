@@ -133,7 +133,8 @@ export const login = async function (prevState, formData) {
 
   const failObject = {
     success:false,
-    message:"Invalid Credentials"}
+    message:"Invalid Credentials",
+    error: "Enter Username and Password"}
 
   const ourUser = {
     email: formData.get("email"),
@@ -141,6 +142,7 @@ export const login = async function (prevState, formData) {
 
   if (typeof ourUser.email != "string") ourUser.email = "";
   if (typeof ourUser.password != "string") ourUser.password = "";
+  
 
   const collection = await getCollection("users")
   const user = await collection.findOne({email:ourUser.email})
