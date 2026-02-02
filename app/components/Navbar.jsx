@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Search, ShoppingCart, ChevronDown } from "lucide-react";
-import { redirect, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import LogoutModal from "./customer/LogoutModal";
 import { useCart } from "../../Context/CartContext";
 import RightNav from "./customer/RightNav";
@@ -20,8 +20,8 @@ export default function Navbar() {
   const [rightNavOpen, setRightNavOpen] = useState(false);
   const pathname = usePathname();
   const { state } = useCart();
-  
-// get the total quantity to show on Cart icon in 
+
+  // get the total quantity to show on Cart icon in 
   const totalQuantity = state.items.reduce((acc, item) => acc + item.quantity, 0);
 
   // Fetch auth status from the API
@@ -38,8 +38,6 @@ export default function Navbar() {
   const toggleProducts = () => {
     setIsProductsOpen(!isProductsOpen);
   };
- 
-  const isLinkActive = (href) => pathname === href;
 
   return (
     <nav className={pathname == "/login" || pathname == "/signUp" ? "hidden" : "block bg-white shadow-lg uppercase"}>
@@ -68,7 +66,7 @@ export default function Navbar() {
 
             {/* Desktop View  */}
             <div className="hidden md:block">
-            <MenuLinks/>
+              {/* <MenuLinks/> */}
             </div>
           </div>
           <div className="hidden md:block">
@@ -83,7 +81,7 @@ export default function Navbar() {
                   className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
-              <div className="relative cursor-pointer" onClick={()=>setRightNavOpen(!rightNavOpen)}>
+              <div className="relative cursor-pointer" onClick={() => setRightNavOpen(!rightNavOpen)}>
                 <ShoppingCart />
                 <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
                   {totalQuantity}
@@ -129,7 +127,7 @@ export default function Navbar() {
           {/* shopping cart in mobile view  */}
           <div
             className="relative cursor-pointer md:hidden mx-2"
-            onClick={()=>setRightNavOpen(!rightNavOpen)}>
+            onClick={() => setRightNavOpen(!rightNavOpen)}>
             <ShoppingCart />
             <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
               {totalQuantity}
@@ -163,9 +161,9 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="md:hidden" id="mobile-menu">
           <div className="block md:hidden">
-            <MenuLinks/>
-            </div>
-         {/* if user is loggedIn then display username in Mobile View else displaying Links of Login and SignUp */}
+            <MenuLinks />
+          </div>
+          {/* if user is loggedIn then display username in Mobile View else displaying Links of Login and SignUp */}
           {isLoggedIn ? (
             <div className="relative" onClick={() => setIsProfileOpen(true)}>
               <button className="ml-4 uppercase">{username}</button>
@@ -174,7 +172,10 @@ export default function Navbar() {
                   onMouseLeave={() => setIsProfileOpen(false)}
                   className="absolute left-0 px-2 py-2 w-24 text-sm text-gray-700 bg-gray-100 hover:bg-gray-400 rounded-md font-medium items-center text-center"
                 >
-                <LogoutModal />
+                  <LogoutModal
+                    setIsProfileOpen={setIsProfileOpen}
+                    isProductsOpen={false}
+                  />
                 </div>
               )}
             </div>

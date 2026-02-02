@@ -2,6 +2,7 @@ import Footer from "./components/Footer";
 import ProductGrid from "./components/customer/ProductGrid";
 import { Suspense } from 'react';
 import { CardsSkeleton } from './components/customer/Skeletons';
+import React from 'react';
 
 
 export const metadata = {
