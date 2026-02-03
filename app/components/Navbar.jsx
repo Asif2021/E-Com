@@ -46,11 +46,11 @@ export default function Navbar() {
           <div className="flex items-center justify-between">
 
             {/* Logo displaying in both Mobile and Desktop  */}
-            {/* <div className="flex-shrink-0">
+            <div className="flex-shrink-0">
               <Link href="/" className="text-xl font-bold text-gray-800">
                 Logo
               </Link>
-            </div> */}
+            </div>
 
             {/* Search Bar showing on top in mobile view and hidden in Desktop */}
             <div className="relative flex md:hidden mx-2">
